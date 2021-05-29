@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-//Daniel p
+//DanielPolo
 namespace EmpresaImportadoraDC
 {
     public class Program
