@@ -5,7 +5,17 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Models.DAL
 {
-    public class AppDbContext
+    public class AppDbContext:DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options):
+            base(options)
+        {
+
+        }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Mercancia> Mercancia { get; set; }
+        public DbSet<Paquete> Paquete { get; set; }
+        public DbSet<Trasportadora> Trasportadora { get; set; }
+
     }
 }
