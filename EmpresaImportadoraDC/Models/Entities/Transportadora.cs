@@ -7,5 +7,6 @@ namespace EmpresaImportadoraDC.Models.Entities
 {
     public class Transportadora
     {
+
     }
 }
