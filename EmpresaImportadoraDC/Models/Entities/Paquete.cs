@@ -14,9 +14,8 @@ namespace EmpresaImportadoraDC.Models.Entities
         public int PaqueteId { get; set; }
         [Required]
         public string Codigo { get; set; }
-        [ForeignKey("Cliente")]
-        [Required (ErrorMessage = "El número de casillero es obligatorio")]        
-        public int NumeroCasillero { get; set; }
+               
+        public int ClienteId { get; set; }
         
         [Column(TypeName = "nvarchar(50)")]
         public string Estado { get; set; }
@@ -29,7 +28,7 @@ namespace EmpresaImportadoraDC.Models.Entities
         [Column(TypeName = "nvarchar(50)")]
         public string TipoMercancia { get; set; }
 
-        public IFormFile Imagen { get; set; }
+        public string RutaImagen { get; set; }
 
         public int NoGuiaCO { get; set; }
 
@@ -37,7 +36,7 @@ namespace EmpresaImportadoraDC.Models.Entities
         public string TransportadoraCO { get; set; }
         
         public long ValorTotal { get; set; }
-        [ForeignKey("NombreCliente")]
+        
         public virtual Cliente Cliente{ get; set;}
     }
 }

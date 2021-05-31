@@ -10,6 +10,8 @@ namespace EmpresaImportadoraDC.Models.Entities
     public class Cliente
     {
         [Key]
+        public int ClienteId { get; set; }
+        [Required]
         public int NumeroCasillero {get; set;}
 
         [Required(ErrorMessage = "El nombre del cliente es obligatorio")]

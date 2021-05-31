@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +9,15 @@ namespace EmpresaImportadoraDC.Models.Entities
 {
     public class Transportadora
     {
+        [Key]
+        public int TransportadoraId { get; set; }
 
+        [Required(ErrorMessage = "El nombre es obligatorio")]
+        [Column(TypeName = "nvarchar(50)")]
+        public string Nombre { get; set; }
+
+        [Required (ErrorMessage = "El pais es obligatorio")]
+        [Column(TypeName = "nvarchar(30)")]
+        public string Pais { get; set; }
     }
 }
