@@ -17,7 +17,7 @@ namespace EmpresaImportadoraDC.Models.DAL
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Mercancia> Mercancia { get; set; }
         public DbSet<Paquete> Paquete { get; set; }
-        public DbSet<Transportadora> Trasportadora { get; set; }
+        public DbSet<Transportadora> Transportadora { get; set; }
 
     }
 }
