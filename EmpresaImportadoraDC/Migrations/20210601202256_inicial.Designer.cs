@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmpresaImportadoraDC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210601183320_inicial")]
+    [Migration("20210601202256_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,9 @@ namespace EmpresaImportadoraDC.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("NoGuiaUSA")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PesoLibras")
                         .HasColumnType("int");
 
                     b.Property<string>("RutaImagen")

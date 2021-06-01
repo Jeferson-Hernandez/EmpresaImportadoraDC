@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <br/>
         <p>
-            <a asp-action="" class="btn btn-success">Crear paquete</a>
+            <a asp-action="" class="btn btn-success">Registrar paquete</a>
         </p>
         <table class="table" id="tabla">
             <thead>
@@ -17,29 +17,14 @@
                         @Html.DisplayNameFor(model => model.Codigo)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.PesoLibras)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.ClienteId)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Estado)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.NoGuiaUSA)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TransportadoraUSA)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.MercanciaId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.NoGuiaCO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TransportadoraCO)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ValorTotal)
-                    </th>
+                    </th>                    
                 </tr>
             </thead>
             <tbody>
@@ -50,30 +35,17 @@
                         @Html.DisplayFor(modelItem => item.Codigo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Cliente.NombreCliente)
+                        @Html.DisplayFor(modelItem => item.PesoLibras)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.NombreCliente) | @Html.DisplayFor(modelItem => item.Cliente.NumeroCasillero)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Estado)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NoGuiaUSA)
+                        <a asp-action="" class="btn btn-success">Detalle</a>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TransportadoraUSA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Mercancia.TipoMercancia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NoGuiaCO)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TransportadoraCO)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValorTotal)
-                    </td>
-                    <a></a>
                 </tr>
             }
             </tbody>

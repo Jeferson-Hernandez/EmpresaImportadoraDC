@@ -56,6 +56,7 @@ namespace EmpresaImportadoraDC.Migrations
                     PaqueteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PesoLibras = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(50)", nullable: true),
                     NoGuiaUSA = table.Column<int>(type: "int", nullable: false),

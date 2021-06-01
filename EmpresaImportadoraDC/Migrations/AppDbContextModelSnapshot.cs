@@ -88,6 +88,9 @@ namespace EmpresaImportadoraDC.Migrations
                     b.Property<int>("NoGuiaUSA")
                         .HasColumnType("int");
 
+                    b.Property<int>("PesoLibras")
+                        .HasColumnType("int");
+
                     b.Property<string>("RutaImagen")
                         .HasColumnType("nvarchar(max)");
 

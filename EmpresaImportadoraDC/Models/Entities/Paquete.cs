@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace EmpresaImportadoraDC.Models.Entities
         public int PaqueteId { get; set; }
         [Required]
         public string Codigo { get; set; }
-               
+
+        [DisplayName("Peso en libras")]
+        [Required(ErrorMessage = "El peso es obligatorio")]
+        public int PesoLibras { get; set; }
+        [DisplayName("Cliente y casillero")]       
         public int ClienteId { get; set; }
         
         [Column(TypeName = "nvarchar(50)")]
@@ -25,7 +30,7 @@ namespace EmpresaImportadoraDC.Models.Entities
         [Column(TypeName = "nvarchar(50)")]
 
         public string TransportadoraUSA { get; set; }
-              
+        [DisplayName("Tipo de mercancía")]
         public int MercanciaId { get; set; }
 
         public string RutaImagen { get; set; }
