@@ -1,5 +1,83 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<EmpresaImportadoraDC.Models.Entities.Paquete>
+
 @{
+    ViewData["Title"] = "Index";
 }
+
+<section class="content">
+    <div class="container-fluid">
+        
+        <p>
+            <a asp-action="" class="btn btn-success">Crear paquete</a>
+        </p>
+        <table class="table" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Codigo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClienteId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Estado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NoGuiaUSA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransportadoraUSA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MercanciaId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NoGuiaCO)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TransportadoraCO)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ValorTotal)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.NombreCliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoGuiaUSA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransportadoraUSA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mercancia.TipoMercancia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoGuiaCO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransportadoraCO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorTotal)
+                    </td>
+                    <a></a>
+                </tr>
+            }
+            </tbody>
+
+        </table>
+    </div>
+</section>

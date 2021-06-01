@@ -48,7 +48,7 @@ namespace EmpresaImportadoraDC.Migrations
 
             modelBuilder.Entity("EmpresaImportadoraDC.Models.Entities.Mercancia", b =>
                 {
-                    b.Property<int>("IdMercancia")
+                    b.Property<int>("MercanciaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -57,7 +57,7 @@ namespace EmpresaImportadoraDC.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("IdMercancia");
+                    b.HasKey("MercanciaId");
 
                     b.ToTable("Mercancia");
                 });
@@ -79,6 +79,9 @@ namespace EmpresaImportadoraDC.Migrations
                     b.Property<string>("Estado")
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("MercanciaId")
+                        .HasColumnType("int");
+
                     b.Property<int>("NoGuiaCO")
                         .HasColumnType("int");
 
@@ -87,10 +90,6 @@ namespace EmpresaImportadoraDC.Migrations
 
                     b.Property<string>("RutaImagen")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TipoMercancia")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TransportadoraCO")
                         .HasColumnType("nvarchar(50)");
@@ -105,6 +104,8 @@ namespace EmpresaImportadoraDC.Migrations
                     b.HasKey("PaqueteId");
 
                     b.HasIndex("ClienteId");
+
+                    b.HasIndex("MercanciaId");
 
                     b.ToTable("Paquete");
                 });
@@ -137,7 +138,15 @@ namespace EmpresaImportadoraDC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EmpresaImportadoraDC.Models.Entities.Mercancia", "Mercancia")
+                        .WithMany()
+                        .HasForeignKey("MercanciaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Cliente");
+
+                    b.Navigation("Mercancia");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EmpresaImportadoraDC.Models.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,18 @@ namespace EmpresaImportadoraDC.Controllers
 {
     public class PaquetesController : Controller
     {
-        public IActionResult Index()
+        private readonly IPaqueteService _paqueteService;
+
+        public PaquetesController(IPaqueteService paqueteService)
         {
-            return View();
+            _paqueteService = paqueteService;
+        }
+
+        [HttpGet]
+        public async Task <IActionResult> Index()
+        {
+            var lista = await _paqueteService.ObtenerListaPaquetes();
+            return View(await _paqueteService.ObtenerListaPaquetes());
         }
     }
 }
