@@ -10,7 +10,7 @@ namespace EmpresaImportadoraDC.Models.Entities
     public class Mercancia
     {
         [Key]
-        public int IdMercancia { get; set; }
+        public int MercanciaId { get; set; }
         [Required(ErrorMessage = "El tipo de mercancía es obligatoria")]
         [Column (TypeName = "nvarchar(50)")]
         public string TipoMercancia { get; set; }

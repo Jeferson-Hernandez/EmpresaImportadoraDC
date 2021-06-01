@@ -23,10 +23,10 @@ namespace EmpresaImportadoraDC.Models.Entities
         public int NoGuiaUSA { get; set; }
         [Required(ErrorMessage = "La transportadora es obligatoria")]
         [Column(TypeName = "nvarchar(50)")]
+
         public string TransportadoraUSA { get; set; }
-        [Required(ErrorMessage = "El tipo de mercancía es obligatorio")]
-        [Column(TypeName = "nvarchar(50)")]
-        public string TipoMercancia { get; set; }
+              
+        public int MercanciaId { get; set; }
 
         public string RutaImagen { get; set; }
 
@@ -37,6 +37,7 @@ namespace EmpresaImportadoraDC.Models.Entities
         
         public long ValorTotal { get; set; }
         
+        public virtual Mercancia Mercancia { get; set; }
         public virtual Cliente Cliente{ get; set;}
     }
 }

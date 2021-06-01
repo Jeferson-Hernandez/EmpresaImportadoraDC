@@ -1,3 +1,5 @@
+using EmpresaImportadoraDC.Models.Abstract;
+using EmpresaImportadoraDC.Models.Business;
 using EmpresaImportadoraDC.Models.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +31,8 @@ namespace EmpresaImportadoraDC
             var conexion = Configuration["ConnetionStrings:conexion_sqlServer"];
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(conexion));
+
+            services.AddScoped<IPaqueteService, PaqueteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +59,7 @@ namespace EmpresaImportadoraDC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Paquetes}/{action=Index}/{id?}");
             });
         }
     }
