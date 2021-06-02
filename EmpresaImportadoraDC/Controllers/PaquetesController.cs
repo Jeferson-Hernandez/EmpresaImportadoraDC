@@ -18,9 +18,17 @@ namespace EmpresaImportadoraDC.Controllers
 
         [HttpGet]
         public async Task <IActionResult> Index()
-        {
-            var lista = await _paqueteService.ObtenerListaPaquetes();
+        {            
             return View(await _paqueteService.ObtenerListaPaquetes());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DetallePaquete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            return View(await _paqueteService.ObtenerPaquetePorId(id.Value));
         }
     }
 }

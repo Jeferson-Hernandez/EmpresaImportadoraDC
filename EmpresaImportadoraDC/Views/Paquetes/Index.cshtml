@@ -6,9 +6,21 @@
 
 <section class="content">
     <div class="container-fluid">
-        <br/>
+        <br />
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">PAQUETES</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item active">Paquetes</li>
+                </ol>
+            </div>
+        </div>
+        <br />
         <p>
-            <a asp-action="" class="btn btn-success">Registrar paquete</a>
+            <a asp-action="" class="btn btn-success ">Registrar paquete</a>
         </p>
         <table class="table" id="tabla">
             <thead>
@@ -24,30 +36,40 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Estado)
-                    </th>                    
+                    </th>
+                    <th>
+                        Despachar paquete
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Codigo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PesoLibras)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Cliente.NombreCliente) | @Html.DisplayFor(modelItem => item.Cliente.NumeroCasillero)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Estado)
-                    </td>
-                    <td>
-                        <a asp-action="" class="btn btn-success">Detalle</a>
-                    </td>
-                </tr>
-            }
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PesoLibras)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cliente.NombreCliente) | @Html.DisplayFor(modelItem => item.Cliente.NumeroCasillero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            <a asp-action="" class="btn btn-success">Despachar</a>
+                        </td>
+                        <td>
+                            <a asp-action="DetallePaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Detalle</a>
+                            <a asp-action="" class="btn btn-success btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
             </tbody>
 
         </table>

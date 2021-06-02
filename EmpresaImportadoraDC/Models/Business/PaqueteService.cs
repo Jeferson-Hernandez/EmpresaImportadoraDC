@@ -22,6 +22,10 @@ namespace EmpresaImportadoraDC.Models.Business
         {
             return await _context.Paquete.Include(c=>c.Cliente).Include(m=>m.Mercancia).ToListAsync();
         }
+        public async Task<Paquete> ObtenerPaquetePorId(int id)
+        {
+            return await _context.Paquete.Include(c => c.Cliente).Include(m => m.Mercancia).FirstOrDefaultAsync(p => p.PaqueteId == id);
+        }
 
         public async Task RegistrarPaquete(Paquete paquete)
         {
