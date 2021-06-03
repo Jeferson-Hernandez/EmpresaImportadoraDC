@@ -39,7 +39,7 @@ namespace EmpresaImportadoraDC.Controllers
             }
         }
          [HttpPost]     
-        public async Task<IActionResult> EliminarEmpleado(int id)
+        public async Task<IActionResult> EliminarCliente(int id)
         {
             try
             {

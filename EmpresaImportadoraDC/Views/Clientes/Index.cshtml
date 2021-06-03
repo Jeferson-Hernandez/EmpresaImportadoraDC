@@ -1,5 +1,76 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<EmpresaImportadoraDC.Models.Entities.Cliente>
 @{
+    ViewData["Title"] = "Index";
 }
+
+<section class="content">
+    <div class="container-fluid">
+        <br />
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">CLIENTES</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item active">Clientes</li>
+                </ol>
+            </div>
+        </div>
+        <br />
+        <p>
+            <a asp-action="" class="btn btn-success ">Registrar cliente</a>
+        </p>
+        <table class="table" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClienteId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumeroCasillero)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NombreCliente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Correo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DireccionEntrega)
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClienteId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumeroCasillero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreCliente)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Correo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DireccionEntrega)
+                        </td>
+                        <td>
+                            <a asp-action="EditarCliente" asp-route-id="@item.ClienteId">EditarCliente</a> |
+                            <a asp-action="EliminarCliente" asp-route-id="@item.ClienteId">EliminarCliente</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</section>
