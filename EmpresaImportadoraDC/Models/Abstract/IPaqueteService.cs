@@ -10,5 +10,6 @@ namespace EmpresaImportadoraDC.Models.Abstract
     {
         Task<IEnumerable<Paquete>> ObtenerListaPaquetes();
         Task RegistrarPaquete(Paquete paquete);
+        Task<Paquete> ObtenerPaquetePorId(int id);
     }
 }
