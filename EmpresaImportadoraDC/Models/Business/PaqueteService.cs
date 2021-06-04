@@ -30,5 +30,10 @@ namespace EmpresaImportadoraDC.Models.Business
             _context.Add(paquete);
             await _context.SaveChangesAsync();
         }
+        public async Task EditarPaquete(Paquete paquete)
+        {
+            _context.Update(paquete);
+            await _context.SaveChangesAsync();
+        }
     }
 }

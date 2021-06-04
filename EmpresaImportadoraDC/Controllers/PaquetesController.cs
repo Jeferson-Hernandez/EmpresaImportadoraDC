@@ -94,5 +94,30 @@ namespace EmpresaImportadoraDC.Controllers
                 return View(paqueteViewModel);
             }*/
         }
+        [HttpGet]
+        public async Task<IActionResult> EditarPaquete(int id = 0)
+        {
+            Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
+            PaqueteViewModel paqueteViewModel = new()
+            {
+                Codigo = paquete.Codigo,
+                PesoLibras = paquete.PesoLibras,
+                ClienteId = paquete.ClienteId,
+                Estado = paquete.Estado,
+                NoGuiaUSA = paquete.NoGuiaUSA,
+                TransportadoraUSA = paquete.TransportadoraUSA,
+                MercanciaId = paquete.MercanciaId,
+                RutaImagen = paquete.RutaImagen,
+                NoGuiaCO = paquete.NoGuiaCO,
+                TransportadoraCO = paquete.TransportadoraCO,
+                ValorTotal = paquete.ValorTotal
+            };
+            return View(paqueteViewModel);
+        }
+        /*[HttpPost]
+        public async Task<IActionResult> EditarPaquete(PaqueteViewModel paqueteViewModel)
+        {
+
+        }*/
     }
 }

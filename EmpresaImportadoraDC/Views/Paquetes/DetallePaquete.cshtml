@@ -26,39 +26,45 @@
         <form asp-route-id="@Model.PaqueteId">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
-                <label class="control-label"><strong>Código: </strong> @Model.Codigo</label>
+                <p><strong>Código: </strong> @Model.Codigo</p>
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Peso en libras: </strong> @Model.PesoLibras</label>
+                <p><strong>Peso en libras: </strong> @Model.PesoLibras</p>
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Cliente: </strong> @Model.Cliente.NombreCliente</label>
+                <p><strong>Cliente: </strong> @Model.Cliente.NombreCliente</p>
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Estado: </strong> @Model.Estado</label>
+                <p><strong>Estado: </strong> @Model.Estado</p>
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Guía transportadora USA: </strong> @Model.NoGuiaUSA</label>
+                <p><strong>Guía transportadora USA: </strong> @Model.NoGuiaUSA</p>
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Empresa transportadora USA : </strong> @Model.TransportadoraUSA</label>
+                <p><strong>Empresa transportadora USA : </strong> @Model.TransportadoraUSA</p>
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Tipo de mercancía: </strong> @Model.Mercancia.TipoMercancia</label>
+                <p><strong>Tipo de mercancía: </strong> @Model.Mercancia.TipoMercancia</p>
             </div>
             <div class="form-group">
-                <label class="control-label"></label>
                 
-                <img src="@("~/imagenes/" + Model.RutaImagen)" asp-append-version="true" class="img-bordered-sm" />
+                @if (Model.RutaImagen != null)
+                {                    
+                    <img src="@("~/imagenes/" + Model.RutaImagen)" asp-append-version="true" class="img-bordered-sm" />
+                }
+                else
+                {
+                    <p>No hay imagen asociada al paquete</p>
+                }
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Guía transportadora CO: </strong> @Model.NoGuiaCO</label>
+                <p><strong>Guía transportadora CO: </strong> @Model.NoGuiaCO</p>
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Empresa transportadora CO: </strong> @Model.TransportadoraCO</label>
+                <p><strong>Empresa transportadora CO: </strong> @Model.TransportadoraCO</p>
             </div>
             <div class="form-group">
-                <label class="control-label"><strong>Valor total: </strong> @Model.ValorTotal</label>
+                <p><strong>Valor total: </strong> @Model.ValorTotal</p>
             </div>
         </form>
     

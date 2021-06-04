@@ -1,5 +1,87 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EmpresaImportadoraDC.ViewModels.PaqueteViewModel
+
 @{
+    ViewData["Title"] = "Detalle";
 }
+
+<section class="content">
+    <div class="container-fluid">
+        <br />
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">EDITAR PAQUETE</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item active">Editar paquete</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="CrearPaquete" asp-route-id="@Model.PaqueteId" enctype="multipart/form-data">
+                <input type="hidden" asp-for="PaqueteId" />
+                <input type="hidden" asp-for="NoGuiaCO" />
+                <input type="hidden" asp-for="TransportadoraCO" />
+                <input type="hidden" asp-for="ValorTotal" />
+                <input type="hidden" asp-for="Estado" />
+                <input type="hidden" asp-for="RutaImagen" />
+                <input type="hidden" asp-for="Codigo" />
+
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-group">
+                    <label asp-for="PesoLibras" class="control-label"></label>
+                    <input asp-for="PesoLibras" class="form-control" />
+                    <span asp-validation-for="PesoLibras" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClienteId" class="control-label"></label>
+                    <input asp-for="ClienteId" class="form-control" />
+                    <span asp-validation-for="ClienteId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NoGuiaUSA" class="control-label"></label>
+                    <input asp-for="NoGuiaUSA" class="form-control" />
+                    <span asp-validation-for="NoGuiaUSA" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TransportadoraUSA" class="control-label"></label>
+                    <input asp-for="TransportadoraUSA" class="form-control" />
+                    <span asp-validation-for="TransportadoraUSA" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MercanciaId" class="control-label"></label>
+                    <input asp-for="MercanciaId" class="form-control" />
+                    <span asp-validation-for="MercanciaId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Imagen" class="control-label"></label>
+                    <input type="file" asp-for="Imagen" accept="image/*" />
+                    <span asp-validation-for="Imagen" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NoGuiaCO" class="control-label"></label>
+                    <input asp-for="NoGuiaCO" class="form-control" />
+                    <span asp-validation-for="NoGuiaCO" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TransportadoraCO" class="control-label"></label>
+                    <input asp-for="TransportadoraCO" class="form-control" />
+                    <span asp-validation-for="TransportadoraCO" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ValorTotal" class="control-label"></label>
+                    <input asp-for="ValorTotal" class="form-control" />
+                    <span asp-validation-for="ValorTotal" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
