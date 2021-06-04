@@ -19,14 +19,11 @@
         </div>
         <br />
         <p>
-            <a asp-action="" class="btn btn-success ">Registrar cliente</a>
+            <a asp-action="Create" class="btn btn-success"><i class="fas fa-user-plus"></i>Registrar cliente</a>
         </p>
         <table class="table" id="tabla">
             <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ClienteId)
-                    </th>
+                <tr>    
                     <th>
                         @Html.DisplayNameFor(model => model.NumeroCasillero)
                     </th>
@@ -47,27 +44,26 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ClienteId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NumeroCasillero)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NombreCliente)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Correo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DireccionEntrega)
-                        </td>
-                        <td>
-                            <a asp-action="EditarCliente" asp-route-id="@item.ClienteId">EditarCliente</a> |
-                            <a asp-action="EliminarCliente" asp-route-id="@item.ClienteId">EliminarCliente</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroCasillero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NombreCliente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Correo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DireccionEntrega)
+                    </td>
+                    <td>
+                        <a asp-action="EditarCliente" asp-route-id="@item.ClienteId">EditarCliente</a> |
+                        <form asp-action="EliminarEmpleado" asp-route-id="@item.ClienteId" class="d-inline">
+                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
                 }
             </tbody>
 

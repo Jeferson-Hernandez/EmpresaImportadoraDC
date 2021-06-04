@@ -3,16 +3,21 @@
     ViewData["Title"] = "CrearCliente";
 }
 
-<h1>CrearCliente</h1>
+<h1>Crear</h1>
 
 <h4>Cliente</h4>
 <hr />
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CrearEditarEmpleado" asp-route-id="@Model.ClienteId" enctype="multipart/form-data">
-            <input type="hidden" asp-for="ClienteId" />
- 
+        <form asp-action="Create">
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NumeroCasillero" class="control-label"></label>
+                <input asp-for="NumeroCasillero" class="form-control" />
+                <span asp-validation-for="NumeroCasillero" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="NombreCliente" class="control-label"></label>
                 <input asp-for="NombreCliente" class="form-control" />

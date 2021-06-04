@@ -6,10 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmpresaImportadoraDC.ViewModels
+/*namespace EmpresaImportadoraDC.ViewModels
 {
     public class ClienteViewModel
     {
+        public int ClienteId { get; set; }
+        public int NumeroCasillero { get; set; }
+
         [Required(ErrorMessage = "El nombre del cliente es obligatorio")]
         [Column(TypeName = "nvarchar(50)")]
         public string NombreCliente { get; set; }
@@ -22,4 +25,4 @@ namespace EmpresaImportadoraDC.ViewModels
         [Column(TypeName = "nvarchar(100)")]
         public string DireccionEntrega { get; set; }
     }
-}
+}*/
