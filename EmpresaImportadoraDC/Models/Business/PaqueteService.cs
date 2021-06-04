@@ -17,7 +17,6 @@ namespace EmpresaImportadoraDC.Models.Business
         {
             _context = context;
         }
-
         public async Task<IEnumerable<Paquete>> ObtenerListaPaquetes()
         {
             return await _context.Paquete.Include(c=>c.Cliente).Include(m=>m.Mercancia).ToListAsync();
@@ -26,7 +25,6 @@ namespace EmpresaImportadoraDC.Models.Business
         {
             return await _context.Paquete.Include(c => c.Cliente).Include(m => m.Mercancia).FirstOrDefaultAsync(p => p.PaqueteId == id);
         }
-
         public async Task RegistrarPaquete(Paquete paquete)
         {
             _context.Add(paquete);

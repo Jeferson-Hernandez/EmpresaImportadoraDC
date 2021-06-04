@@ -20,7 +20,7 @@
         </div>
         <br />
         <p>
-            <a asp-action="" class="btn btn-success ">Registrar paquete</a>
+            <a asp-action="CrearPaquete" class="btn btn-success ">Registrar paquete</a>
         </p>
         <table class="table" id="tabla">
             <thead>
@@ -66,6 +66,7 @@
                         </td>
                         <td>
                             <a asp-action="DetallePaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Detalle</a>
+                            <a asp-action="CrearEditarPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Editar</a>
                             <a asp-action="" class="btn btn-success btn-danger">Eliminar</a>
                         </td>
                     </tr>

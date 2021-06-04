@@ -10,8 +10,12 @@ namespace EmpresaImportadoraDC.ViewModels
 {
     public class PaqueteViewModel
     {
+        public int PaqueteId { get; set; }
         [Required]
         public string Codigo { get; set; }
+        
+        [Required(ErrorMessage = "El peso es obligatorio")]
+        public int PesoLibras { get; set; }
 
         public int ClienteId { get; set; }
 
@@ -24,7 +28,7 @@ namespace EmpresaImportadoraDC.ViewModels
         public string TransportadoraUSA { get; set; }
         [Required(ErrorMessage = "El tipo de mercancía es obligatorio")]
         [Column(TypeName = "nvarchar(50)")]
-        public string TipoMercancia { get; set; }
+        public int MercanciaId { get; set; }
 
         public IFormFile Imagen { get; set; }
 

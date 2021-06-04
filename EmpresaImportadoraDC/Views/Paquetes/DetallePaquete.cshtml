@@ -21,43 +21,48 @@
     </div>
 </section>
 <br />
-<form asp-route-id="@Model.PaqueteId">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label class="control-label"><strong>Código: </strong> @Model.Codigo</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Peso en libras: </strong> @Model.PesoLibras</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Cliente: </strong> @Model.Cliente.NombreCliente</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Estado: </strong> @Model.Estado</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Guía transportadora USA: </strong> @Model.NoGuiaUSA</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Empresa transportadora USA : </strong> @Model.TransportadoraUSA</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Tipo de mercancía: </strong> @Model.Mercancia.TipoMercancia</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Imagen: </strong> </label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Guía transportadora CO: </strong> @Model.NoGuiaCO</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Empresa transportadora CO: </strong> @Model.TransportadoraCO</label>
-    </div>
-    <div class="form-group">
-        <label class="control-label"><strong>Valor total: </strong> @Model.ValorTotal</label>
-    </div>
-</form>
-        
+<div class="container">
+    
+        <form asp-route-id="@Model.PaqueteId">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label class="control-label"><strong>Código: </strong> @Model.Codigo</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Peso en libras: </strong> @Model.PesoLibras</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Cliente: </strong> @Model.Cliente.NombreCliente</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Estado: </strong> @Model.Estado</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Guía transportadora USA: </strong> @Model.NoGuiaUSA</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Empresa transportadora USA : </strong> @Model.TransportadoraUSA</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Tipo de mercancía: </strong> @Model.Mercancia.TipoMercancia</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"></label>
+                
+                <img src="@("~/imagenes/" + Model.RutaImagen)" asp-append-version="true" class="img-bordered-sm" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Guía transportadora CO: </strong> @Model.NoGuiaCO</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Empresa transportadora CO: </strong> @Model.TransportadoraCO</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><strong>Valor total: </strong> @Model.ValorTotal</label>
+            </div>
+        </form>
+    
+ </div>
 
 
 
