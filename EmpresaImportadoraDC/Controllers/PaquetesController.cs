@@ -208,5 +208,26 @@ namespace EmpresaImportadoraDC.Controllers
                 return NotFound();
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DespacharPaquete(int id)
+        {
+            Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
+            return View(paquete);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DespacharPaquete(Paquete paquete)
+        {
+            if (ModelState.IsValid)
+            {
+                paquete.Estado = "En tránsito a dirección del cliente";
+                await _paqueteService.EditarPaquete(paquete);
+                return RedirectToAction("index");
+            }
+            else
+            {
+                return NotFound();
+            }            
+        }
     }
 }

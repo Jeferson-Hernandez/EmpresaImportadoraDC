@@ -13,7 +13,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Paquetes">Inicio</a></li>
                     <li class="breadcrumb-item active">Paquetes</li>
                 </ol>
             </div>
@@ -62,7 +62,7 @@
                             @Html.DisplayFor(modelItem => item.Estado)
                         </td>
                         <td>
-                            <a asp-action="" class="btn btn-success">Despachar</a>
+                            <a asp-action="DespacharPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Despachar</a>
                         </td>
                         <td>
                             <a asp-action="DetallePaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Detalle</a>

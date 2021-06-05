@@ -20,3 +20,36 @@
         </div>
     </div>
 </section>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="DespacharPaquete" asp-route-id="@Model.PaqueteId" enctype="multipart/form-data">
+                <input type="hidden" asp-for="PaqueteId" />
+                <input type="hidden" asp-for="NoGuiaUSA" />
+                <input type="hidden" asp-for="TransportadoraUSA" />
+                <input type="hidden" asp-for="ValorTotal" />
+                <input type="hidden" asp-for="Estado" />
+                <input type="hidden" asp-for="RutaImagen" />
+                <input type="hidden" asp-for="Codigo" />
+                <input type="hidden" asp-for="PesoLibras" />
+                <input type="hidden" asp-for="ClienteId" />
+                <input type="hidden" asp-for="MercanciaId" />
+
+                <div asp-validation-summary="ModelOnly"></div>                
+                <div class="form-group">
+                    <label asp-for="NoGuiaCO" class="control-label"></label>
+                    <input asp-for="NoGuiaCO" class="form-control" />
+                    <span asp-validation-for="NoGuiaCO" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TransportadoraCO" class="control-label"></label>
+                    <input asp-for="TransportadoraCO" class="form-control" />
+                    <span asp-validation-for="TransportadoraCO" class="text-danger"></span>
+                </div>   
+                <div class="form-group">
+                    <input type="submit" value="Despachar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
