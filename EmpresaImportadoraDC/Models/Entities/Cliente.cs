@@ -9,7 +9,8 @@ namespace EmpresaImportadoraDC.Models.Entities
 {
     public class Cliente
     {
-        [Key]
+        
+        [Key] 
         public int ClienteId { get; set; }
         [Required]
         public int NumeroCasillero {get; set;}
