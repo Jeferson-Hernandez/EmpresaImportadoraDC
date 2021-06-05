@@ -95,11 +95,12 @@ namespace EmpresaImportadoraDC.Controllers
             }*/
         }
         [HttpGet]
-        public async Task<IActionResult> EditarPaquete(int id = 0)
+        public async Task<IActionResult> EditarPaquete(int id)
         {
             Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
             PaqueteViewModel paqueteViewModel = new()
             {
+                PaqueteId = paquete.PaqueteId,
                 Codigo = paquete.Codigo,
                 PesoLibras = paquete.PesoLibras,
                 ClienteId = paquete.ClienteId,
@@ -110,14 +111,80 @@ namespace EmpresaImportadoraDC.Controllers
                 RutaImagen = paquete.RutaImagen,
                 NoGuiaCO = paquete.NoGuiaCO,
                 TransportadoraCO = paquete.TransportadoraCO,
-                ValorTotal = paquete.ValorTotal
+                ValorTotal = paquete.ValorTotal                
             };
             return View(paqueteViewModel);
         }
-        /*[HttpPost]
+        [HttpPost]
         public async Task<IActionResult> EditarPaquete(PaqueteViewModel paqueteViewModel)
         {
+            //if (ModelState.IsValid)
+            //{
 
-        }*/
+            Paquete paquete = new()
+            {
+                PaqueteId = paqueteViewModel.PaqueteId,
+                Codigo = paqueteViewModel.Codigo,
+                PesoLibras = paqueteViewModel.PesoLibras,
+                ClienteId = paqueteViewModel.ClienteId,
+                Estado = paqueteViewModel.Estado,
+                NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
+                TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
+                MercanciaId = paqueteViewModel.MercanciaId,
+                NoGuiaCO = paqueteViewModel.NoGuiaCO,
+                TransportadoraCO = paqueteViewModel.TransportadoraCO,
+                ValorTotal = paqueteViewModel.ValorTotal
+            };
+
+            Paquete paqueteInfo = await _paqueteService.ObtenerPaquetePorId(paqueteViewModel.PaqueteId);
+            if (paqueteInfo.PesoLibras != paqueteViewModel.PesoLibras)
+            {
+                paquete.ValorTotal = 35000 * paqueteViewModel.PesoLibras;
+            }            
+
+            string wwwRootPath = null;
+            string path = null;
+
+            if (paqueteViewModel.Imagen != null)
+            {
+                wwwRootPath = _hostEnvironment.WebRootPath;
+                string nombreImagen = Path.GetFileNameWithoutExtension(paqueteViewModel.Imagen.FileName);
+                string extension = Path.GetExtension(paqueteViewModel.Imagen.FileName);
+                paquete.RutaImagen = nombreImagen + DateTime.Now.ToString("yymmssfff") + extension;
+                path = Path.Combine(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
+            }
+
+            try
+            {
+                if (path != null)
+                {
+                    using var fileStream = new FileStream(path, FileMode.Create);
+                    await paqueteViewModel.Imagen.CopyToAsync(fileStream);
+
+                    if (paqueteViewModel.RutaImagen != null)
+                    {
+                        FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paqueteViewModel.RutaImagen);
+                        file.Delete();
+                    }
+                }
+                else
+                {
+                    paquete.RutaImagen = paqueteViewModel.RutaImagen;
+                }
+
+                await _paqueteService.EditarPaquete(paquete);
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+            /*}
+            else
+            {
+                return View(paqueteViewModel);
+            }*/
+        }
     }
 }
