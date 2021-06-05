@@ -134,13 +134,7 @@ namespace EmpresaImportadoraDC.Controllers
                 NoGuiaCO = paqueteViewModel.NoGuiaCO,
                 TransportadoraCO = paqueteViewModel.TransportadoraCO,
                 ValorTotal = paqueteViewModel.ValorTotal
-            };
-
-            Paquete paqueteInfo = await _paqueteService.ObtenerPaquetePorId(paqueteViewModel.PaqueteId);
-            if (paqueteInfo.PesoLibras != paqueteViewModel.PesoLibras)
-            {
-                paquete.ValorTotal = 35000 * paqueteViewModel.PesoLibras;
-            }            
+            };                      
 
             string wwwRootPath = null;
             string path = null;
