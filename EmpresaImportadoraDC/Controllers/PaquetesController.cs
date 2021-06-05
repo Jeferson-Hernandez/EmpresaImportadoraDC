@@ -3,6 +3,7 @@ using EmpresaImportadoraDC.Models.Entities;
 using EmpresaImportadoraDC.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,11 +16,13 @@ namespace EmpresaImportadoraDC.Controllers
     {
         private readonly IPaqueteService _paqueteService;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IClienteService _clienteService;
 
-        public PaquetesController(IPaqueteService paqueteService, IWebHostEnvironment hostEnvironment)
+        public PaquetesController(IPaqueteService paqueteService, IWebHostEnvironment hostEnvironment,IClienteService clienteService)
         {
             _paqueteService = paqueteService;
             _hostEnvironment = hostEnvironment;
+            _clienteService = clienteService;
         }
 
         [HttpGet]
@@ -38,8 +41,9 @@ namespace EmpresaImportadoraDC.Controllers
         }
 
         [HttpGet]
-        public IActionResult CrearPaquete()
+        public async Task<IActionResult> CrearPaquete()
         {
+            ViewBag.ListaClientes = new SelectList(await _clienteService.ObtenerListaClientes(), "ClienteId", "NombreCliente");
             return View(new PaqueteViewModel());
         }
 
@@ -97,6 +101,7 @@ namespace EmpresaImportadoraDC.Controllers
         [HttpGet]
         public async Task<IActionResult> EditarPaquete(int id)
         {
+            ViewBag.ListaClientes = new SelectList(await _clienteService.ObtenerListaClientes(), "ClienteId", "NombreCliente");
             Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
             PaqueteViewModel paqueteViewModel = new()
             {
@@ -179,6 +184,29 @@ namespace EmpresaImportadoraDC.Controllers
             {
                 return View(paqueteViewModel);
             }*/
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EliminarPaquete(int id)
+        {
+            try
+            {
+                Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
+                
+                if (paquete.RutaImagen != null)
+                {
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
+                    file.Delete();
+                }
+
+                await _paqueteService.EliminarPaquete(id);
+                return RedirectToAction("index");
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
     }
 }

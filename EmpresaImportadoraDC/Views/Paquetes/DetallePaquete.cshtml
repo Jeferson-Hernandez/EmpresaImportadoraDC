@@ -13,7 +13,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Paquetes">Inicio</a></li>
                     <li class="breadcrumb-item active">Detalle de paquete</li>
                 </ol>
             </div>
@@ -50,7 +50,7 @@
                 
                 @if (Model.RutaImagen != null)
                 {                    
-                    <img src="@("~/imagenes/" + Model.RutaImagen)" asp-append-version="true" class="img-bordered-sm" />
+                    <img src="@("~/imagenes/" + Model.RutaImagen)" asp-append-version="true" class="img-fluid w-25 h-auto" />
                 }
                 else
                 {

@@ -12,5 +12,6 @@ namespace EmpresaImportadoraDC.Models.Abstract
         Task RegistrarPaquete(Paquete paquete);
         Task<Paquete> ObtenerPaquetePorId(int id);
         Task EditarPaquete(Paquete paquete);
+        Task EliminarPaquete(int id);
     }
 }

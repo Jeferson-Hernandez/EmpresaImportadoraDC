@@ -35,5 +35,11 @@ namespace EmpresaImportadoraDC.Models.Business
             _context.Update(paquete);
             await _context.SaveChangesAsync();
         }
+        public async Task EliminarPaquete(int id)
+        {
+            var paquete = await ObtenerPaquetePorId(id);
+            _context.Remove(paquete);
+            await _context.SaveChangesAsync();
+        }
     }
 }
