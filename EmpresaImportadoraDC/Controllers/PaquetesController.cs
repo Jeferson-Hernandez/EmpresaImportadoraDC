@@ -229,5 +229,10 @@ namespace EmpresaImportadoraDC.Controllers
                 return NotFound();
             }            
         }
+        [HttpGet]
+        public async Task<IActionResult> DashboardPaquete()
+        {
+            return View(await _paqueteService.ObtenerListaPaquetes());
+        }
     }
 }
