@@ -85,11 +85,15 @@ namespace EmpresaImportadoraDC.Controllers
                     }
 
                     await _paqueteService.RegistrarPaquete(paquete);
+                    TempData["Accion"] = "RegistrarPaquete";
+                    TempData["Mensaje"] = "Paquete registrado correctamente";
                     return RedirectToAction("index");
                 }
                 catch (Exception)
                 {
-                    return NotFound();
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ocurrió un error";
+                    return RedirectToAction("index");
                 }
 
             /*}
@@ -170,13 +174,16 @@ namespace EmpresaImportadoraDC.Controllers
                 {
                     paquete.RutaImagen = paqueteViewModel.RutaImagen;
                 }
-
                 await _paqueteService.EditarPaquete(paquete);
+                TempData["Accion"] = "EditarPaquete";
+                TempData["Mensaje"] = "Paquete editado correctamente";
                 return RedirectToAction("index");
             }
             catch (Exception)
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
             }
 
             /*}
@@ -201,11 +208,15 @@ namespace EmpresaImportadoraDC.Controllers
                 }
 
                 await _paqueteService.EliminarPaquete(id);
+                TempData["Accion"] = "EliminarPaquete";
+                TempData["Mensaje"] = "Paquete eliminado correctamente";
                 return RedirectToAction("index");
             }
             catch (Exception)
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
             }
         }
 
@@ -222,11 +233,15 @@ namespace EmpresaImportadoraDC.Controllers
             {
                 paquete.Estado = "En tránsito a dirección del cliente";
                 await _paqueteService.EditarPaquete(paquete);
+                TempData["Accion"] = "DespacharPaquete";
+                TempData["Mensaje"] = "Paquete despachado correctamente";
                 return RedirectToAction("index");
             }
             else
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
             }            
         }
         [HttpGet]

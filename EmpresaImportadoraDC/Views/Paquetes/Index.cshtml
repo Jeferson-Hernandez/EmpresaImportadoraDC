@@ -78,3 +78,55 @@
         </table>
     </div>
 </section>
+
+@section Scripts{ 
+
+    <script src="~/js/tabla.js"></script>
+    <script>
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("RegistrarPaquete")) { <text>
+                  Swal.fire({
+                    title: "Registrar paquete",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarPaquete")) { <text>
+                  Swal.fire({
+                    title: "Editar paquete",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("DespacharPaquete")) { <text>
+                  Swal.fire({
+                    title: "Despachar paquete",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarPaquete")) { <text>
+                  Swal.fire({
+                    title: "Eliminar paquete",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+                  Swal.fire({
+                    title: "Error",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+    </script>
+}
