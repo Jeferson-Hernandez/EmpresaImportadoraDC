@@ -43,16 +43,16 @@ namespace EmpresaImportadoraDC.Controllers
             return View(mercancia);
         }
 
-        // GET: Cargos/Create
-        public IActionResult CrearMerca()
+        // Ver la vista de mercancias
+        public IActionResult CrearMer()
         {
             return View();
         }
 
-        //Merca
+        //Registrar nueva mercancia
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CrearMerca([Bind("CargoId,Nombre")] Mercancia mercancia)
+        public async Task<IActionResult> CrearMer([Bind("TipoMercancia")] Mercancia mercancia)
         {
             if (ModelState.IsValid)
             {
