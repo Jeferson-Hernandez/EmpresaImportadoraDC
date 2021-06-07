@@ -23,7 +23,7 @@
         </p>
         <table class="table" id="tabla">
             <thead>
-                <tr>    
+                <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.NumeroCasillero)
                     </th>
@@ -44,31 +44,91 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NumeroCasillero)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NombreCliente)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Correo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DireccionEntrega)
-                    </td>
-                    <td>
-                        <a asp-action="EditarCli" asp-route-id="@item.ClienteId">Editar</a> |
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumeroCasillero)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreCliente)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Correo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DireccionEntrega)
+                        </td>
+                        <td>
+                            <a asp-action="EditarCli" asp-route-id="@item.ClienteId">Editar</a> |
 
-                        <a asp-action="VerDetallePaqueteCliente" width="300" height="420" frameborder="0" allowtransparency="true" style="visibility: visible;" asp-route-id="@item.ClienteId">Ver detalle</a> |
-                        <form asp-action="EliminarCliente" asp-route-id="@item.ClienteId" class="d-inline">
-                            <button type="submit" onclick="confirm('¿Desea eliminar este cliente?')" class="btn btn-danger"><i class="fas fa-user-minus"></i></button>
-                        </form>
-                    </td>
-                </tr>
+                            <a asp-action="VerDetallePaqueteCliente" width="300" height="420" frameborder="0" allowtransparency="true" style="visibility: visible;" asp-route-id="@item.ClienteId">Ver detalle</a> |
+                            <form asp-action="EliminarCliente" asp-route-id="@item.ClienteId" class="d-inline">
+                                <button type="submit" onclick="confirm('¿Desea eliminar este cliente?')" class="btn btn-danger"><i class="fas fa-user-minus"></i></button>
+                            </form>
+                        </td>
+                    </tr>
                 }
             </tbody>
 
         </table>
     </div>
 </section>
+@section Scripts{
+
+    <script src="~/js/tabla.js"></script>
+    <script>
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("RegistrarCliente")) { <text>
+                  Swal.fire({
+                    title: "Registrar cliente",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarCliente")) { <text>
+                  Swal.fire({
+                    title: "Editar cliente",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarCliente")) { <text>
+                  Swal.fire({
+                    title: "Eliminar cliente",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("RegistrarClienteRC")) { <text>
+                  Swal.fire({
+                      title: "RegistrarClienteRC",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarClienteEC")) { <text>
+                  Swal.fire({
+                      title: "EditarClienteEC",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+          @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarClienteEC")) { <text>
+                  Swal.fire({
+                      title: "EliminarClienteEC",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+    </script>
+}
