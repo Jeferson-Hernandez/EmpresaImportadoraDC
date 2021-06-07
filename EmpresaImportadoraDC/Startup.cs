@@ -36,6 +36,7 @@ namespace EmpresaImportadoraDC
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IMercanciaService, MercanciaService>();
             services.AddScoped<IValorLibraService, ValorLibraService>();
+            services.AddScoped<ITransportadoraService, TransportadoraService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +63,7 @@ namespace EmpresaImportadoraDC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Mercancia}/{action=Index}/{id?}");
+                    pattern: "{controller=Clientes}/{action=Index}/{id?}");
             });
         }
     }

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<EmpresaImportadoraDC.Models.Entities.Paquete>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Paquete";
 }
 
 <section class="content">
@@ -62,7 +62,14 @@
                             @Html.DisplayFor(modelItem => item.Estado)
                         </td>
                         <td>
-                            <a asp-action="DespacharPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Despachar</a>
+                            @if (item.Estado.Contains("En tránsito a dirección del cliente"))
+                            {
+                                <a class="btn btn-dark">Despachado</a>
+                            }
+                            else
+                            {
+                                <a asp-action="DespacharPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Despachar</a>
+                            }
                         </td>
                         <td>
                             <a asp-action="DetallePaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Detalle</a>
