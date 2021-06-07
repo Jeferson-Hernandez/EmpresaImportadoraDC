@@ -133,6 +133,21 @@ namespace EmpresaImportadoraDC.Migrations
                     b.ToTable("Transportadora");
                 });
 
+            modelBuilder.Entity("EmpresaImportadoraDC.Models.Entities.ValorLibra", b =>
+                {
+                    b.Property<int>("ValorLibraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ValorLi")
+                        .HasColumnType("int");
+
+                    b.HasKey("ValorLibraId");
+
+                    b.ToTable("ValorLibra");
+                });
+
             modelBuilder.Entity("EmpresaImportadoraDC.Models.Entities.Paquete", b =>
                 {
                     b.HasOne("EmpresaImportadoraDC.Models.Entities.Cliente", "Cliente")

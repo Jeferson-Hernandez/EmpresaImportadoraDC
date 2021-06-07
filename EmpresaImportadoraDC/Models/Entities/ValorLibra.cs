@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Models.Entities
 {
-    public class ValorLi
+    public class ValorLibra
     {
         [Key]
-        public int ValorLibra { get; set; }
+        public int ValorLibraId { get; set; }
+
+        [Required(ErrorMessage = "El valor es obligatorio")]
+        public int ValorLi { get; set; }
     }
 }

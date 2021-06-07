@@ -50,6 +50,19 @@ namespace EmpresaImportadoraDC.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ValorLibra",
+                columns: table => new
+                {
+                    ValorLibraId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ValorLi = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ValorLibra", x => x.ValorLibraId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Paquete",
                 columns: table => new
                 {
@@ -102,6 +115,9 @@ namespace EmpresaImportadoraDC.Migrations
 
             migrationBuilder.DropTable(
                 name: "Transportadora");
+
+            migrationBuilder.DropTable(
+                name: "ValorLibra");
 
             migrationBuilder.DropTable(
                 name: "Cliente");

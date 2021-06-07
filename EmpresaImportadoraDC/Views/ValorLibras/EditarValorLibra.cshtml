@@ -1,0 +1,63 @@
+﻿@model EmpresaImportadoraDC.Models.Entities.ValorLibra
+
+@{
+    ViewData["Title"] = "EditarValorLibra";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <br />
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">EDITAR VALOR LIBRA</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Clientes">Inicio</a></li>
+                    <li class="breadcrumb-item active">Editar valor libra</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditarValorLibra" enctype="multipart/form-data">
+                <input type="hidden" asp-for="@Model.ValorLibraId" />
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-group">
+                    <label class="control-label">Valor libra</label>
+                    <input asp-for="ValorLi" class="form-control" />
+                    <span asp-validation-for="ValorLi" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Editar valor" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarValor")) { <text>
+                  Swal.fire({
+                    title: "Editar valor",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+                  Swal.fire({
+                    title: "Error",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+    </script>
+
+ }

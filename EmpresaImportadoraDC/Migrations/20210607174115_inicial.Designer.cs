@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmpresaImportadoraDC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210601202256_inicial")]
+    [Migration("20210607174115_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,6 +133,21 @@ namespace EmpresaImportadoraDC.Migrations
                     b.HasKey("TransportadoraId");
 
                     b.ToTable("Transportadora");
+                });
+
+            modelBuilder.Entity("EmpresaImportadoraDC.Models.Entities.ValorLibra", b =>
+                {
+                    b.Property<int>("ValorLibraId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ValorLi")
+                        .HasColumnType("int");
+
+                    b.HasKey("ValorLibraId");
+
+                    b.ToTable("ValorLibra");
                 });
 
             modelBuilder.Entity("EmpresaImportadoraDC.Models.Entities.Paquete", b =>

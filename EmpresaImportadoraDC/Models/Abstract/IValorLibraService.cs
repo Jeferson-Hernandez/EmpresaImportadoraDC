@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Models.Abstract
 {
-    public interface IValorService
+    public interface IValorLibraService
     {
-        Task<IEnumerable<ValorLi>> ObtenerValorLibra();
+        Task<ValorLibra> ObtenerValorLibra();
+        Task EditarValorLibra(ValorLibra valorLibra);
     }
 }
