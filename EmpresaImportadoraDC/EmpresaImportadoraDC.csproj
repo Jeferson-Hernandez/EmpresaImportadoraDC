@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Transportadoras\CrearTr.cshtml" />
+    <None Include="Views\Transportadoras\EditarTr.cshtml" />
+    <None Include="Views\Transportadoras\EliminarTr.cshtml" />
+    <None Include="Views\Transportadoras\Index.cshtml" />
     <None Include="wwwroot\adminlte\dist\css\adminlte.css.map" />
     <None Include="wwwroot\adminlte\dist\css\adminlte.min.css.map" />
     <None Include="wwwroot\adminlte\dist\css\alt\adminlte.components.css.map" />

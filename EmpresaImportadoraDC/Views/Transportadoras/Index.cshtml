@@ -1,0 +1,48 @@
+﻿@model IEnumerable<EmpresaImportadoraDC.Models.Entities.Transportadora>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Styles{ }
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="CrearTr" class="btn btn-success">Crear Transportadora</a>
+</p>
+<table class="table" id="tabla">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pais)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                    
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pais)
+                </td>
+                <td>
+                    <a asp-action="EditarTr" asp-route-id="@item.TransportadoraId">Editar</a> |
+                    
+                    <a asp-action="EliminarTr" asp-route-id="@item.TransportadoraId">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script src="~/js/tabla.js"></script>
+}
