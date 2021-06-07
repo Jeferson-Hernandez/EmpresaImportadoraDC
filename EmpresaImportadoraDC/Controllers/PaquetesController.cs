@@ -19,14 +19,16 @@ namespace EmpresaImportadoraDC.Controllers
         private readonly IClienteService _clienteService;
         private readonly IMercanciaService _mercanciaService;
         private readonly IValorLibraService _valorLibraService;
+        private readonly ITransportadoraService _transportadoraService;
 
-        public PaquetesController(IPaqueteService paqueteService, IWebHostEnvironment hostEnvironment, IClienteService clienteService, IMercanciaService mercanciaService, IValorLibraService valorLibraService)
+        public PaquetesController(IPaqueteService paqueteService, IWebHostEnvironment hostEnvironment, IClienteService clienteService, IMercanciaService mercanciaService, IValorLibraService valorLibraService, ITransportadoraService transportadoraService)
         {
             _paqueteService = paqueteService;
             _hostEnvironment = hostEnvironment;
             _clienteService = clienteService;
             _mercanciaService = mercanciaService;
             _valorLibraService = valorLibraService;
+            _transportadoraService = transportadoraService;
         }
 
         [HttpGet]
@@ -49,6 +51,7 @@ namespace EmpresaImportadoraDC.Controllers
         {
             ViewBag.ListaClientes = new SelectList(await _clienteService.ObtenerListaClientes(), "ClienteId", "NombreCliente");
             ViewBag.ListaMercancia = new SelectList(await _mercanciaService.ObtenerListaMercancia(), "MercanciaId", "TipoMercancia");
+            ViewBag.ListaTransportadoraUSA = new SelectList(await _transportadoraService.ObtenerListaTransportadorasUSA(), "Nombre", "Nombre");            
             return View(new PaqueteViewModel());
         }
 
@@ -114,6 +117,8 @@ namespace EmpresaImportadoraDC.Controllers
         {
             ViewBag.ListaClientes = new SelectList(await _clienteService.ObtenerListaClientes(), "ClienteId", "NombreCliente");
             ViewBag.ListaMercancia = new SelectList(await _mercanciaService.ObtenerListaMercancia(), "MercanciaId", "TipoMercancia");
+            ViewBag.ListaTransportadoraUSA = new SelectList(await _transportadoraService.ObtenerListaTransportadorasUSA(), "Nombre", "Nombre");
+            ViewBag.ListaTransportadoraCO = new SelectList(await _transportadoraService.ObtenerListaTransportadorasCO(), "Nombre", "Nombre");
             Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
             PaqueteViewModel paqueteViewModel = new()
             {
@@ -231,6 +236,7 @@ namespace EmpresaImportadoraDC.Controllers
         [HttpGet]
         public async Task<IActionResult> DespacharPaquete(int id)
         {
+            ViewBag.ListaTransportadoraCO = new SelectList(await _transportadoraService.ObtenerListaTransportadorasCO(), "Nombre", "Nombre");
             Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
             return View(paquete);
         }
