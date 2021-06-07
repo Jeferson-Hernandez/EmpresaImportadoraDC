@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Models.Business
 {
-  /* public class ValorService : IValorService
+    public class ValorService : IValorService
     {
         private readonly AppDbContext _context;
         public ValorService(AppDbContext context)
@@ -17,10 +17,10 @@ namespace EmpresaImportadoraDC.Models.Business
             _context = context;
         }
 
-       /* public async Task<IEnumerable<ValorLi>> ObtenerValorLibra()
+        /*public async Task<IEnumerable<ValorLi>> ObtenerValorLibra()
         {
             return await _context.ValorLi.ToListAsync();
-          
-        }
-    }*/
+
+        }*/
+    }    
 }

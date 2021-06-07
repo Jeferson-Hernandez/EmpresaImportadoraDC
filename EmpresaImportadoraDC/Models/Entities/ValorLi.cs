@@ -9,6 +9,9 @@ namespace EmpresaImportadoraDC.Models.Entities
     public class ValorLi
     {
         [Key]
+        public int ValorLibraId { get; set; }
+
+        [Required(ErrorMessage = "El valor es obligatorio")]
         public int ValorLibra { get; set; }
     }
 }
