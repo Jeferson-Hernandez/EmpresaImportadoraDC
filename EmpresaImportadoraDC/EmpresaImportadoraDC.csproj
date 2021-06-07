@@ -1540,4 +1540,6 @@
     <None Include="wwwroot\adminlte\plugins\uplot\uPlot.iife.min.js" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>

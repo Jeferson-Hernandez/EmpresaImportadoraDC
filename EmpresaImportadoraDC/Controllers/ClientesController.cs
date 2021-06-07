@@ -28,23 +28,6 @@ namespace EmpresaImportadoraDC.Controllers
         {
             return View(await _context.Cliente.ToListAsync());
         }
-
-        /* public async Task<IActionResult> Details(int? Id)
-         {
-             if (Id == null)
-             {
-                 return NotFound();
-             }
-
-             var paquete = await _context.Paquete
-                 .FirstOrDefaultAsync(m => m.PaqueteId == Id);
-             if (paquete == null)
-             {
-                 return NotFound();
-             }
-
-             return View(paquete);
-         }*/
         [HttpGet]
         public async Task<IActionResult> VerDetallePaqueteCliente()
         {

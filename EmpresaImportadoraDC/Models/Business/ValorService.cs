@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Models.Business
 {
-    public class ClienteService : IClienteService
+  /* public class ValorService : IValorService
     {
         private readonly AppDbContext _context;
-        public ClienteService(AppDbContext context)
+        public ValorService(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<Cliente>> ObtenerListaClientes()
+       /* public async Task<IEnumerable<ValorLi>> ObtenerValorLibra()
         {
-            return await _context.Cliente.ToListAsync();
+            return await _context.ValorLi.ToListAsync();
+          
         }
-    }
+    }*/
 }
