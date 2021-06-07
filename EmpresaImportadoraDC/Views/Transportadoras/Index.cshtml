@@ -35,9 +35,11 @@
                     @Html.DisplayFor(modelItem => item.Pais)
                 </td>
                 <td>
-                    <a asp-action="EditarTr" asp-route-id="@item.TransportadoraId">Editar</a> |
-                    
-                    <a asp-action="EliminarTr" asp-route-id="@item.TransportadoraId">Eliminar</a>
+                    <a asp-action="EditarTr" asp-route-id="@item.TransportadoraId" class="btn btn-success">Editar</a> |
+
+                    <form asp-action="EliminarTr" asp-route-id="@item.TransportadoraId" class="d-inline">
+                        <button type="submit" onclick="confirm('¿Desea eliminar esta transportadora?')" class="btn btn-danger"><i class="fas fa-user-minus"></i></button>
+                    </form>
                 </td>
             </tr>
         }

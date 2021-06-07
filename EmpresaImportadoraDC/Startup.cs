@@ -62,7 +62,7 @@ namespace EmpresaImportadoraDC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Mercancia}/{action=Index}/{id?}");
+                    pattern: "{controller=Transportadoras}/{action=Index}/{Id?}");
             });
         }
     }
