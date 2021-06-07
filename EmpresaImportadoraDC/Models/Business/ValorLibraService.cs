@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Models.Business
 {
-    public class ValorService : IValorService
+    public class ValorLibraService : IValorLibraService
     {
         private readonly AppDbContext _context;
-        public ValorService(AppDbContext context)
+        public ValorLibraService(AppDbContext context)
         {
             _context = context;
         }

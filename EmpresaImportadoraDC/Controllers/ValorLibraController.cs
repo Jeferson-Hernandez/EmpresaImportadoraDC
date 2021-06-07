@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Controllers
 {
-    public class ValorController : Controller
+    public class ValorLibraController : Controller
     {
         private readonly AppDbContext _context;
         
 
-        public ValorController(AppDbContext context)
+        public ValorLibraController(AppDbContext context)
         {
             _context = context;
         }
