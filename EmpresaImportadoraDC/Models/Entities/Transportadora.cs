@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Models.Entities
 {
+
+    /// <summary>
+    /// Daniel Agudelo Montoya
+    /// </summary>
     public class Transportadora
     {
         [Key]
