@@ -60,7 +60,7 @@
                         <td>
                             <a asp-action="EditarCli" asp-route-id="@item.ClienteId">Editar</a> |
 
-                            <a asp-action="VerDetallePaqueteCliente" width="300" height="420" frameborder="0" allowtransparency="true" style="visibility: visible;" asp-route-id="@item.ClienteId">Ver detalle</a> |
+                            <a asp-action="VerDetallePaqueteCliente" asp-route-id="@item.ClienteId">Ver detalle</a> |
                             <form asp-action="EliminarCliente" asp-route-id="@item.ClienteId" class="d-inline">
                                 <button type="submit" onclick="confirm('¿Desea eliminar este cliente?')" class="btn btn-danger"><i class="fas fa-user-minus"></i></button>
                             </form>
