@@ -1,0 +1,38 @@
+﻿@model EmpresaImportadoraDC.Models.Entities.Mercancia
+
+@{
+    ViewData["Title"] = "EditarMerca";
+}
+<h1>EditarMercancia</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditarCli">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MercanciaId" />
+            <div class="form-group">
+                <label asp-for="TipoMercancia" class="control-label"></label>
+                <input asp-for="TipoMercancia" class="form-control" />
+                <span asp-validation-for="TipoMercancia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MercanciaId" class="control-label"></label>
+                <input asp-for="MercanciaId" class="form-control" />
+                <span asp-validation-for="MercanciaId" class="text-danger"></span>
+            </div>           
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">volver</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

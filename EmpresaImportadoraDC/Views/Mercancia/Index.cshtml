@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EmpresaImportadoraDC.Models.Entities.Mercancia>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <br />
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">MERCANCIA</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item active">Mercancia</li>
+                </ol>
+            </div>
+        </div>
+        <br />
+        <p>
+            <a asp-action="CrearMerca" class="btn btn-success"><i class="fas fa-user-plus"></i>Registrar Mercancia</a>
+        </p>
+        <table class="table" id="tabla">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MercanciaId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TipoMercancia)
+                    </th>
+                    Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MercanciaId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoMercancia)
+                        </td>
+                        <td>
+                            <a asp-action="EditarMerca" asp-route-id="@item.MercanciaId">EditarMercancia</a> |
+                            <form asp-action="ElimiarMerca" asp-route-id="@item.MercanciaId" class="d-inline">
+                                <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</section>
