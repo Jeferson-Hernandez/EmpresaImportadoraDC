@@ -17,12 +17,14 @@ namespace EmpresaImportadoraDC.Controllers
         private readonly IPaqueteService _paqueteService;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IClienteService _clienteService;
+        private readonly IMercanciaService _mercanciaService;
 
-        public PaquetesController(IPaqueteService paqueteService, IWebHostEnvironment hostEnvironment,IClienteService clienteService)
+        public PaquetesController(IPaqueteService paqueteService, IWebHostEnvironment hostEnvironment, IClienteService clienteService, IMercanciaService mercanciaService)
         {
             _paqueteService = paqueteService;
             _hostEnvironment = hostEnvironment;
             _clienteService = clienteService;
+            _mercanciaService = mercanciaService;
         }
 
         [HttpGet]
@@ -44,6 +46,7 @@ namespace EmpresaImportadoraDC.Controllers
         public async Task<IActionResult> CrearPaquete()
         {
             ViewBag.ListaClientes = new SelectList(await _clienteService.ObtenerListaClientes(), "ClienteId", "NombreCliente");
+            ViewBag.ListaMercancia = new SelectList(await _mercanciaService.ObtenerListaMercancia(), "MercanciaId", "TipoMercancia");
             return View(new PaqueteViewModel());
         }
 
@@ -106,6 +109,7 @@ namespace EmpresaImportadoraDC.Controllers
         public async Task<IActionResult> EditarPaquete(int id)
         {
             ViewBag.ListaClientes = new SelectList(await _clienteService.ObtenerListaClientes(), "ClienteId", "NombreCliente");
+            ViewBag.ListaMercancia = new SelectList(await _mercanciaService.ObtenerListaMercancia(), "MercanciaId", "TipoMercancia");
             Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
             PaqueteViewModel paqueteViewModel = new()
             {
