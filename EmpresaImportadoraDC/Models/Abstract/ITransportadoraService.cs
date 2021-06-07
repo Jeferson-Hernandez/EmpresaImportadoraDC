@@ -9,5 +9,7 @@ namespace EmpresaImportadoraDC.Models.Abstract
     public interface ITransportadoraService
     {
         Task<IEnumerable<Transportadora>> ObtenerListaTransportadoras();
+        Task<IEnumerable<Transportadora>> ObtenerListaTransportadorasUSA();
+        Task<IEnumerable<Transportadora>> ObtenerListaTransportadorasCO();
     }
 }

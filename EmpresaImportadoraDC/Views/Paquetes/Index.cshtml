@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<EmpresaImportadoraDC.Models.Entities.Paquete>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Paquete";
 }
 
 <section class="content">
@@ -20,7 +20,7 @@
         </div>
         <br />
         <p>
-            <a asp-action="CrearPaquete" class="btn btn-success ">Registrar paquete</a>
+            <a asp-action="CrearPaquete" class="btn btn-success "><i class="fas fa-plus"></i> Registrar paquete</a>
         </p>
         <table class="table" id="tabla">
             <thead>
@@ -62,13 +62,20 @@
                             @Html.DisplayFor(modelItem => item.Estado)
                         </td>
                         <td>
-                            <a asp-action="DespacharPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Despachar</a>
+                            @if (item.Estado.Contains("En tránsito a dirección del cliente"))
+                            {
+                                <a class="btn btn-dark">Despachado</a>
+                            }
+                            else
+                            {
+                                <a asp-action="DespacharPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Despachar</a>
+                            }
                         </td>
                         <td>
-                            <a asp-action="DetallePaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Detalle</a>
-                            <a asp-action="EditarPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success">Editar</a>
+                            <a asp-action="DetallePaquete" asp-route-id="@item.PaqueteId" class="btn btn-success"><i class="fas fa-info-circle"></i></a>
+                            <a asp-action="EditarPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
                             <form asp-action="EliminarPaquete" asp-route-id="@item.PaqueteId" class="d-inline">
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </form>                            
                         </td>
                     </tr>
