@@ -8,6 +8,7 @@ namespace EmpresaImportadoraDC.Models.Abstract
 {
     public interface IValorLibraService
     {
-        //Task<IEnumerable<ValorLi>> ObtenerValorLibra();
+        Task<ValorLibra> ObtenerValorLibra();
+        Task EditarValorLibra(ValorLibra valorLibra);
     }
 }

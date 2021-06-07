@@ -17,10 +17,15 @@ namespace EmpresaImportadoraDC.Models.Business
             _context = context;
         }
 
-        /*public async Task<IEnumerable<ValorLi>> ObtenerValorLibra()
+        public async Task<ValorLibra> ObtenerValorLibra()
         {
-            return await _context.ValorLi.ToListAsync();
+            return await _context.ValorLibra.FirstOrDefaultAsync(p => p.ValorLibraId == 1);
+        }
 
-        }*/
-    }    
+        public async Task EditarValorLibra(ValorLibra valorLibra)
+        {
+            _context.Update(valorLibra);
+            await _context.SaveChangesAsync();
+        }
+    }
 }

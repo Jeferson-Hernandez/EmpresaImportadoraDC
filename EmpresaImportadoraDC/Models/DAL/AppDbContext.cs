@@ -18,6 +18,7 @@ namespace EmpresaImportadoraDC.Models.DAL
         public DbSet<Mercancia> Mercancia { get; set; }
         public DbSet<Paquete> Paquete { get; set; }
         public DbSet<Transportadora> Transportadora { get; set; }
+        public DbSet<ValorLibra> ValorLibra { get; set; }
 
     }
 }

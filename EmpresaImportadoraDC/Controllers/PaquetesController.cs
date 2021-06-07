@@ -18,13 +18,15 @@ namespace EmpresaImportadoraDC.Controllers
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IClienteService _clienteService;
         private readonly IMercanciaService _mercanciaService;
+        private readonly IValorLibraService _valorLibraService;
 
-        public PaquetesController(IPaqueteService paqueteService, IWebHostEnvironment hostEnvironment, IClienteService clienteService, IMercanciaService mercanciaService)
+        public PaquetesController(IPaqueteService paqueteService, IWebHostEnvironment hostEnvironment, IClienteService clienteService, IMercanciaService mercanciaService, IValorLibraService valorLibraService)
         {
             _paqueteService = paqueteService;
             _hostEnvironment = hostEnvironment;
             _clienteService = clienteService;
             _mercanciaService = mercanciaService;
+            _valorLibraService = valorLibraService;
         }
 
         [HttpGet]
@@ -55,6 +57,8 @@ namespace EmpresaImportadoraDC.Controllers
         {
             //if (ModelState.IsValid)
             //{
+                ValorLibra valorLibra = await _valorLibraService.ObtenerValorLibra();
+
                 Paquete paquete = new()
                 {
                     Codigo = "MIA-" + DateTime.Now.ToString("yymmssfff"),
@@ -64,7 +68,7 @@ namespace EmpresaImportadoraDC.Controllers
                     NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
                     TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
                     MercanciaId = paqueteViewModel.MercanciaId,
-                    ValorTotal = 35000 * paqueteViewModel.PesoLibras
+                    ValorTotal = valorLibra.ValorLi * paqueteViewModel.PesoLibras
                 };
 
                 string wwwRootPath = null;
