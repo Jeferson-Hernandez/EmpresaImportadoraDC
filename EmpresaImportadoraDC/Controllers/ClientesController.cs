@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using EmpresaImportadoraDC.Models.Abstract;
 
 namespace EmpresaImportadoraDC.Controllers
 {
     public class ClientesController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IPaqueteService _paqueteService;
 
-        public ClientesController(AppDbContext context)
+        public ClientesController(AppDbContext context, IPaqueteService paqueteService)
         {
             _context = context;
+            _paqueteService = paqueteService;
         }
 
         // GET: Clientes
@@ -25,31 +28,37 @@ namespace EmpresaImportadoraDC.Controllers
         {
             return View(await _context.Cliente.ToListAsync());
         }
-        public async Task<IActionResult> Details(int? Id)
+
+        /* public async Task<IActionResult> Details(int? Id)
+         {
+             if (Id == null)
+             {
+                 return NotFound();
+             }
+
+             var paquete = await _context.Paquete
+                 .FirstOrDefaultAsync(m => m.PaqueteId == Id);
+             if (paquete == null)
+             {
+                 return NotFound();
+             }
+
+             return View(paquete);
+         }*/
+        [HttpGet]
+        public async Task<IActionResult> VerDetallePaqueteCliente()
         {
-            if (Id == null)
-            {
-                return NotFound();
-            }
-
-            var cliente = await _context.Cliente
-                .FirstOrDefaultAsync(m => m.ClienteId == Id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-
-            return View(cliente);
+            return View(await _paqueteService.ObtenerListaPaquetes());
         }
-      
-        public IActionResult Create()
+
+        public IActionResult CrearCli()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult>Create([Bind("ClienteId,NumeroCasillero,NombreCliente,Correo,DireccionEntrega")] Cliente cliente)
+        public async Task<IActionResult>CrearCli([Bind("ClienteId,NumeroCasillero,NombreCliente,Correo,DireccionEntrega")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +69,7 @@ namespace EmpresaImportadoraDC.Controllers
             return View(cliente);
         }
 
-        public async Task<IActionResult>EditarCliente(int? Id)
+        public async Task<IActionResult> EditarCli(int? Id)
         {
             if (Id == null)
             {
@@ -77,7 +86,7 @@ namespace EmpresaImportadoraDC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult>EditarCliente(int Id, [Bind("ClienteId,NumeroCasillero,NombreCliente,Correo,DireccionEntrega")] Cliente cliente)
+        public async Task<IActionResult> EditarCli(int Id, [Bind("ClienteId,NumeroCasillero,NombreCliente,Correo,DireccionEntrega")] Cliente cliente)
         {
             if (Id != cliente.ClienteId)
             {
@@ -101,7 +110,9 @@ namespace EmpresaImportadoraDC.Controllers
                     {
                         throw;
                     }
+
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(cliente);

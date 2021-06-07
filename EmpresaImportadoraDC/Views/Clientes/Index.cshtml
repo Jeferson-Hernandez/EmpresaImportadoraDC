@@ -19,7 +19,7 @@
         </div>
         <br />
         <p>
-            <a asp-action="Create" class="btn btn-success"><i class="fas fa-user-plus"></i>Registrar cliente</a>
+            <a asp-action="CrearCli" class="btn btn-success"><i class="fas fa-user-plus"></i>Registrar cliente</a>
         </p>
         <table class="table" id="tabla">
             <thead>
@@ -58,9 +58,11 @@
                         @Html.DisplayFor(modelItem => item.DireccionEntrega)
                     </td>
                     <td>
-                        <a asp-action="EditarCliente" asp-route-id="@item.ClienteId">EditarCliente</a> |
-                        <form asp-action="EliminarEmpleado" asp-route-id="@item.ClienteId" class="d-inline">
-                            <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>
+                        <a asp-action="EditarCli" asp-route-id="@item.ClienteId">Editar</a> |
+
+                        <a asp-action="VerDetallePaqueteCliente" width="300" height="420" frameborder="0" allowtransparency="true" style="visibility: visible;" asp-route-id="@item.ClienteId">Ver detalle</a> |
+                        <form asp-action="EliminarCliente" asp-route-id="@item.ClienteId" class="d-inline">
+                            <button type="submit" onclick="confirm('¿Desea eliminar este cliente?')" class="btn btn-danger"><i class="fas fa-user-minus"></i></button>
                         </form>
                     </td>
                 </tr>

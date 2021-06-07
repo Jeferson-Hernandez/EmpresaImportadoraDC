@@ -1,18 +1,18 @@
 ﻿@model EmpresaImportadoraDC.Models.Entities.Cliente
+
 @{
-    ViewData["Title"] = "CrearCliente";
+    ViewData["Title"] = "EditarCliente";
 }
+<h1>EditarCliente</h1>
 
-<h1>Crear</h1>
-
-<h4>Cliente</h4>
-<hr />
+<hr/>
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="EditarCli">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ClienteId" />
             <div class="form-group">
                 <label asp-for="NumeroCasillero" class="control-label"></label>
                 <input asp-for="NumeroCasillero" class="form-control" />
@@ -39,7 +39,6 @@
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">volver</a>
 </div>
