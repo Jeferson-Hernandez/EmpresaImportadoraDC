@@ -41,5 +41,10 @@ namespace EmpresaImportadoraDC.Models.Business
             _context.Remove(paquete);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Paquete>> ObtenerListaPaquetesPorId(int id)
+        {
+            return await _context.Paquete.Where(p => p.ClienteId == id).ToListAsync();
+        }
     }
 }

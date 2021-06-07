@@ -21,6 +21,14 @@ namespace EmpresaImportadoraDC.Models.Business
         {
             return await _context.Transportadora.ToListAsync();
         }
+        public async Task<IEnumerable<Transportadora>> ObtenerListaTransportadorasUSA()
+        {
+            return await _context.Transportadora.Where(u=>u.Pais == "USA").ToListAsync();            
+        }
+        public async Task<IEnumerable<Transportadora>> ObtenerListaTransportadorasCO()
+        {
+            return await _context.Transportadora.Where(c => c.Pais == "CO").ToListAsync();
+        }
 
     }
 }
