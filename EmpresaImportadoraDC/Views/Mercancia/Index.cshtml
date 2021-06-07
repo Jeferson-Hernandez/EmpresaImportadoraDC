@@ -30,7 +30,8 @@
                     <th>
                         @Html.DisplayNameFor(model => model.TipoMercancia)
                     </th>
-                    Acciones
+                    <th>
+                        Acciones
                     </th>
                 </tr>
             </thead>
@@ -45,7 +46,7 @@
                             @Html.DisplayFor(modelItem => item.TipoMercancia)
                         </td>
                         <td>
-                            <a asp-action="EditarMerca" asp-route-id="@item.MercanciaId">EditarMercancia</a> |
+                            <a asp-action="EditarMerca" asp-route-id="@item.MercanciaId">Editar</a> |
                             <form asp-action="ElimiarMerca" asp-route-id="@item.MercanciaId" class="d-inline">
                                 <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>
                             </form>
