@@ -60,4 +60,45 @@
 </table>
 @section Scripts{
     <script src="~/js/tabla.js"></script>
+
+<script>
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("CrearTra")) { <text>
+                  Swal.fire({
+                    title: "Proceso finalizado",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarTra")) { <text>
+                  Swal.fire({
+                    title: "Proceso finalizado",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+         
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarTra")) { <text>
+                  Swal.fire({
+                    title: "Proceso finalizado",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+                  Swal.fire({
+                    title: "Error",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+</script>
 }
