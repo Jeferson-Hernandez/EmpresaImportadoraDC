@@ -58,8 +58,8 @@ namespace EmpresaImportadoraDC.Controllers
         [HttpPost]
         public async Task<IActionResult> CrearPaquete(PaqueteViewModel paqueteViewModel)
         {
-            //if (ModelState.IsValid)
-            //{
+            /*if (ModelState.IsValid)
+            {*/
                 ValorLibra valorLibra = await _valorLibraService.ObtenerValorLibra();
 
                 Paquete paquete = new()
@@ -109,6 +109,8 @@ namespace EmpresaImportadoraDC.Controllers
             /*}
             else
             {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
                 return View(paqueteViewModel);
             }*/
         }
@@ -140,70 +142,70 @@ namespace EmpresaImportadoraDC.Controllers
         [HttpPost]
         public async Task<IActionResult> EditarPaquete(PaqueteViewModel paqueteViewModel)
         {
-            //if (ModelState.IsValid)
-            //{
-
-            Paquete paquete = new()
+            if (ModelState.IsValid)
             {
-                PaqueteId = paqueteViewModel.PaqueteId,
-                Codigo = paqueteViewModel.Codigo,
-                PesoLibras = paqueteViewModel.PesoLibras,
-                ClienteId = paqueteViewModel.ClienteId,
-                Estado = paqueteViewModel.Estado,
-                NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
-                TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
-                MercanciaId = paqueteViewModel.MercanciaId,
-                NoGuiaCO = paqueteViewModel.NoGuiaCO,
-                TransportadoraCO = paqueteViewModel.TransportadoraCO,
-                ValorTotal = paqueteViewModel.ValorTotal
-            };                      
-
-            string wwwRootPath = null;
-            string path = null;
-
-            if (paqueteViewModel.Imagen != null)
-            {
-                wwwRootPath = _hostEnvironment.WebRootPath;
-                string nombreImagen = Path.GetFileNameWithoutExtension(paqueteViewModel.Imagen.FileName);
-                string extension = Path.GetExtension(paqueteViewModel.Imagen.FileName);
-                paquete.RutaImagen = nombreImagen + DateTime.Now.ToString("yymmssfff") + extension;
-                path = Path.Combine(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
-            }
-
-            try
-            {
-                if (path != null)
+                Paquete paquete = new()
                 {
-                    using var fileStream = new FileStream(path, FileMode.Create);
-                    await paqueteViewModel.Imagen.CopyToAsync(fileStream);
+                    PaqueteId = paqueteViewModel.PaqueteId,
+                    Codigo = paqueteViewModel.Codigo,
+                    PesoLibras = paqueteViewModel.PesoLibras,
+                    ClienteId = paqueteViewModel.ClienteId,
+                    Estado = paqueteViewModel.Estado,
+                    NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
+                    TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
+                    MercanciaId = paqueteViewModel.MercanciaId,
+                    NoGuiaCO = paqueteViewModel.NoGuiaCO,
+                    TransportadoraCO = paqueteViewModel.TransportadoraCO,
+                    ValorTotal = paqueteViewModel.ValorTotal
+                };                      
 
-                    if (paqueteViewModel.RutaImagen != null)
+                string wwwRootPath = null;
+                string path = null;
+
+                if (paqueteViewModel.Imagen != null)
+                {
+                    wwwRootPath = _hostEnvironment.WebRootPath;
+                    string nombreImagen = Path.GetFileNameWithoutExtension(paqueteViewModel.Imagen.FileName);
+                    string extension = Path.GetExtension(paqueteViewModel.Imagen.FileName);
+                    paquete.RutaImagen = nombreImagen + DateTime.Now.ToString("yymmssfff") + extension;
+                    path = Path.Combine(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
+                }
+
+                try
+                {
+                    if (path != null)
                     {
-                        FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paqueteViewModel.RutaImagen);
-                        file.Delete();
+                        using var fileStream = new FileStream(path, FileMode.Create);
+                        await paqueteViewModel.Imagen.CopyToAsync(fileStream);
+
+                        if (paqueteViewModel.RutaImagen != null)
+                        {
+                            FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paqueteViewModel.RutaImagen);
+                            file.Delete();
+                        }
                     }
+                    else
+                    {
+                        paquete.RutaImagen = paqueteViewModel.RutaImagen;
+                    }
+                    await _paqueteService.EditarPaquete(paquete);
+                    TempData["Accion"] = "EditarPaquete";
+                    TempData["Mensaje"] = "Paquete editado correctamente";
+                    return RedirectToAction("index");
                 }
-                else
+                catch (Exception)
                 {
-                    paquete.RutaImagen = paqueteViewModel.RutaImagen;
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ocurrió un error";
+                    return RedirectToAction("index");
                 }
-                await _paqueteService.EditarPaquete(paquete);
-                TempData["Accion"] = "EditarPaquete";
-                TempData["Mensaje"] = "Paquete editado correctamente";
-                return RedirectToAction("index");
             }
-            catch (Exception)
+            else
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Ocurrió un error";
-                return RedirectToAction("index");
-            }
-
-            /*}
-            else
-            {
                 return View(paqueteViewModel);
-            }*/
+            }
         }
 
         [HttpPost]
