@@ -24,7 +24,7 @@ namespace EmpresaImportadoraDC.Models.Entities
         
         [Column(TypeName = "nvarchar(50)")]
         public string Estado { get; set; }
-
+        [Required(ErrorMessage = "El número de guia es obligatoria")]
         public int NoGuiaUSA { get; set; }
         [Required(ErrorMessage = "La transportadora es obligatoria")]
         [Column(TypeName = "nvarchar(50)")]
