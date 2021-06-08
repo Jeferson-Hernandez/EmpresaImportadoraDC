@@ -63,7 +63,7 @@ namespace EmpresaImportadoraDC.Controllers
             return View(mercancia);
 
         }
-        // GET: Cargos/Edit/5
+        // GET: Mercancia/Edit/5
         public async Task<IActionResult> EditarMerca(int? id)
         {
             if (id == null)
@@ -82,7 +82,7 @@ namespace EmpresaImportadoraDC.Controllers
         //dg
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditarMerca(int id, [Bind("TipoMercancia")] Mercancia mercancia)
+        public async Task<IActionResult> EditarMerca(int id, [Bind("MercanciaId", "TipoMercancia")] Mercancia mercancia)
         {
             if (id != mercancia.MercanciaId)
             {
