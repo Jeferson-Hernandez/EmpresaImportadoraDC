@@ -1,6 +1,6 @@
 ﻿using EmpresaImportadoraDC.Models.DAL;
 using EmpresaImportadoraDC.Models.Entities;
-
+using EmpresaImportadoraDC.Models.Business;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +29,14 @@ namespace EmpresaImportadoraDC.Controllers
             return View(await _context.Cliente.ToListAsync());
         }
         [HttpGet]
-        public async Task<IActionResult> VerDetallePaqueteCliente()
+        public async Task<IActionResult> VerDetallePaqueteCliente(int? id)
         {
-            return View(await _paqueteService.ObtenerListaPaquetes());
+           
+            if (id == null)
+                return NotFound();
+
+            return View(await _paqueteService.ObtenerListaPaquetesPorId(id.Value));
+
         }
 
         public IActionResult CrearCli()
@@ -155,6 +160,11 @@ namespace EmpresaImportadoraDC.Controllers
         private bool ClienteExists(int Id)
         {
             return _context.Cliente.Any(e => e.ClienteId == Id);
+        }
+        [HttpGet]
+        public async Task<IActionResult> DashboardCli()
+        {
+            return View(await _context.Cliente.ToListAsync());
         }
     }
 }
