@@ -1,22 +1,12 @@
 ﻿  <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="~/adminlte/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <a asp-action="index" asp-controller="Clientes" class="brand-link">        
+        <span class="brand-text font-weight-light">Empresa Importadora DC</span>
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="~/adminlte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
-            </div>
-        </div>
+    <div class="sidebar">        
 
         <!-- SidebarSearch Form -->
         <div class="form-inline">
@@ -35,7 +25,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-archive"></i>
+                        <i class="fas fa-user"></i>
                         <p>
                             CLIENTE
                             <i class="right fas fa-angle-left"></i>
@@ -50,7 +40,7 @@
                         </li>
                         <li class="nav-item">
                             <a asp-action="index" asp-controller="Clientes" class="nav-link">
-                                <i class="fas fa-box-open"></i>
+                                <i class="fas fa-users"></i>
                                 <p>Clientes</p>
                             </a>
                         </li>
@@ -81,7 +71,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fas fa-archive"></i>
+                        <i class="fas fa-cog"></i>
                         <p>
                             CONFIGURACIÓN
                             <i class="right fas fa-angle-left"></i>
@@ -90,13 +80,13 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a asp-action="EditarValorLibra" asp-controller="ValorLibras" class="nav-link">
-                                <i class="fas fa-hockey-puck"></i>
+                                <i class="fas fa-coins"></i>
                                 <p>Valor Libra</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a asp-action="index" asp-controller="Mercancia" class="nav-link">
-                                <i class="fas fa-hockey-puck"></i>
+                                <i class="fas fa-people-carry"></i>
                                 <p>Mercancias</p>
                             </a>
                         </li>
