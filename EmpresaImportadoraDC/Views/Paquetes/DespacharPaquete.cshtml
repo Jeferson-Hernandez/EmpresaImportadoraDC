@@ -35,7 +35,7 @@
                 <input type="hidden" asp-for="ClienteId" />
                 <input type="hidden" asp-for="MercanciaId" />
 
-                <div asp-validation-summary="ModelOnly"></div>                
+                <div asp-validation-summary="ModelOnly"></div>
                 <div class="form-group">
                     <label asp-for="NoGuiaCO" class="control-label"></label>
                     <input asp-for="NoGuiaCO" class="form-control" />
@@ -45,7 +45,7 @@
                     <label asp-for="TransportadoraCO" class="control-label"></label>
                     <select asp-items="ViewBag.ListaTransportadoraCO" asp-for="TransportadoraCO" class="form-control"></select>
                     <span asp-validation-for="TransportadoraCO" class="text-danger"></span>
-                </div>   
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Despachar" class="btn btn-primary" />
                 </div>
@@ -53,3 +53,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
