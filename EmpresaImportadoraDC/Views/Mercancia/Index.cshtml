@@ -8,25 +8,22 @@
         <br />
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">MERCANCIA</h1>
+                <h1 class="m-0">Mercancía</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item active">Mercancia</li>
+                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Mercancia">Inicio</a></li>
+                    <li class="breadcrumb-item active">Mercancía</li>
                 </ol>
             </div>
         </div>
         <br />
         <p>
-            <a asp-action="CrearMer" class="btn btn-success"><i class="fas fa-plus"></i> Registrar Mercancia</a>
+            <a asp-action="CrearMer" class="btn btn-success"><i class="fas fa-plus"></i> Registrar Mercancía</a>
         </p>
         <table class="table" id="tabla">
             <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.MercanciaId)
-                    </th>
+                <tr>                    
                     <th>
                         @Html.DisplayNameFor(model => model.TipoMercancia)
                     </th>
@@ -38,10 +35,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MercanciaId)
-                        </td>
+                    <tr>                       
                         <td>
                             @Html.DisplayFor(modelItem => item.TipoMercancia)
                         </td>

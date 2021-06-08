@@ -2,12 +2,20 @@
 @{
     ViewData["Title"] = "CrearCliente";
 }
-
-<h1>Crear</h1>
-
-<h4>Cliente</h4>
-<hr />
-
+<br/>
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Clientes</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="Clientes">Inicio</a></li>
+                <li class="breadcrumb-item active">Clientes</li>
+            </ol>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="CrearCli">
@@ -33,8 +41,7 @@
                 <input asp-for="DireccionEntrega" class="form-control" />
                 <span asp-validation-for="DireccionEntrega" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <a class="btn btn-danger" asp-action="Index">Cancelar</a>
+            <div class="form-group">                
                 <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>

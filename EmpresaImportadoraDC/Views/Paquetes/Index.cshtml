@@ -9,7 +9,7 @@
         <br />
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">PAQUETES</h1>
+                <h1 class="m-0">Paquetes</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -72,7 +72,7 @@
                             }
                         </td>
                         <td>
-                            <a asp-action="DetallePaquete" asp-route-id="@item.PaqueteId" class="btn btn-success"><i class="fas fa-info-circle"></i></a>|
+                            <a asp-action="DetallePaquete" asp-route-id="@item.PaqueteId" class="btn btn-dark"><i class="fas fa-info-circle"></i></a>|
                             <a asp-action="EditarPaquete" asp-route-id="@item.PaqueteId" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>|
                             <form asp-action="EliminarPaquete" asp-route-id="@item.PaqueteId" class="d-inline">
                                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>

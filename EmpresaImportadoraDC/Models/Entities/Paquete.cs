@@ -13,6 +13,7 @@ namespace EmpresaImportadoraDC.Models.Entities
     {
         [Key]
         public int PaqueteId { get; set; }
+        [DisplayName("Código")]
         [Required]
         public string Codigo { get; set; }
 
@@ -39,7 +40,7 @@ namespace EmpresaImportadoraDC.Models.Entities
 
         [Column(TypeName = "nvarchar(50)")]
         public string TransportadoraCO { get; set; }
-        
+        [DisplayName("Valor total")]
         public long ValorTotal { get; set; }
         
         public virtual Mercancia Mercancia { get; set; }
