@@ -38,11 +38,21 @@ namespace EmpresaImportadoraDC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CrearTr([Bind("TransportadoraId, Nombre, Pais")] Transportadora transportadora)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(transportadora);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(transportadora);
+                    await _context.SaveChangesAsync();
+                    TempData["Accion"] = "CrearTra";
+                    TempData["Mensaje"] = "Transportadora creada exitosamente";
+                    return RedirectToAction(nameof(Index));
+                }
+            }catch (Exception)
+            {
+                TempData["Accion"] = "CrearTraF";
+                TempData["Mensaje"] = "Fallo al crear la transportadora";
+                 
             }
             return View(transportadora);
         }
@@ -50,12 +60,14 @@ namespace EmpresaImportadoraDC.Controllers
         // Editar
         public async Task<IActionResult> EditarTr(int? Id)
         {
+
             if (Id == null)
             {
                 return NotFound();
             }
 
             var transportadora = await _context.Transportadora.FindAsync(Id);
+            
             if (transportadora == null)
             {
                 return NotFound();
@@ -68,6 +80,7 @@ namespace EmpresaImportadoraDC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditarTr(int Id, [Bind("TransportadoraId, Nombre, Pais")] Transportadora transportadora)
         {
+
             if (Id != transportadora.TransportadoraId)
             {
                 return NotFound();
@@ -79,9 +92,13 @@ namespace EmpresaImportadoraDC.Controllers
                 {
                     _context.Update(transportadora);
                     await _context.SaveChangesAsync();
+                    TempData["Accion"] = "EditarTra";
+                    TempData["Mensaje"] = "Transportadora editada exitosamente";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    TempData["Accion"] = "EditarTra";
+                    TempData["Mensaje"] = "Fallo al editar la transportadora";
                     if (!TransportadoraExists(transportadora.TransportadoraId))
                     {
                         return NotFound();
@@ -99,11 +116,12 @@ namespace EmpresaImportadoraDC.Controllers
         //Eliminar
         public async Task<IActionResult> EliminarTr(int? Id)
         {
+
             if (Id == null)
             {
                 return NotFound();
             }
-
+            
             var transportadora = await _context.Transportadora
                 .FirstOrDefaultAsync(m => m.TransportadoraId == Id);
             if (transportadora == null)
@@ -119,10 +137,21 @@ namespace EmpresaImportadoraDC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EliminarConfirmado(int Id)
         {
-            var transportadora = await _context.Transportadora.FindAsync(Id);
-            _context.Transportadora.Remove(transportadora);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var transportadora = await _context.Transportadora.FindAsync(Id);
+                _context.Transportadora.Remove(transportadora);
+                await _context.SaveChangesAsync();
+                TempData["Accion"] = "EliminarTra";
+                TempData["Mensaje"] = "Transportadora eliminada exitosamente";
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                TempData["Accion"] = "EliminarTra";
+                TempData["Mensaje"] = "Fallo al eliminar la transportadora";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool TransportadoraExists(int Id)
