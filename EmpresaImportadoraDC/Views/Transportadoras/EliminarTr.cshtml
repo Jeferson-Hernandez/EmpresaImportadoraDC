@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Eliminar";
 }
-
+<!--
 <h1>Eliminar</h1>
 
 <h3>¿Estás seguro de eliminar este registro?</h3>
@@ -26,11 +26,10 @@
             @Html.DisplayFor(model => model.Pais)
         </dd>
     </dl>
-
-    <form asp-action="EliminarTr">
-        <input type="hidden" asp-for="TransportadoraId" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index" class="btn btn-outline-secondary">Regresar a la lista</a>
-    </form>
-</div>
-
+    -->
+<form asp-action="EliminarTr">
+    <input type="hidden" asp-for="TransportadoraId" />
+    <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+    <a asp-action="Index" class="btn btn-outline-secondary">Regresar a la lista</a>
+</form>
+<!--</div>-->

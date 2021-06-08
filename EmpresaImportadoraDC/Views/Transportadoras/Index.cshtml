@@ -6,10 +6,23 @@
 
 @section Styles{ }
 
-<h1>Index</h1>
 
+
+<br />
+<div class="row mb-2">
+    <div class="col-sm-6">
+        <h1 class="m-0">TRANSPORTADORAS</h1>
+    </div>
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a asp-action="index" asp-controller="Transportadoras">Inicio</a></li>
+            <li class="breadcrumb-item active">Transportadoras</li>
+        </ol>
+    </div>
+</div>
+<br />
 <p>
-    <a asp-action="CrearTr" class="btn btn-success">Crear Transportadora</a>
+    <a asp-action="CrearTr" class="btn btn-success "><i class="fas fa-plus"></i> Registrar transportadora</a>
 </p>
 <table class="table" id="tabla">
     <thead>
@@ -29,15 +42,17 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
-                    
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Pais)
                 </td>
                 <td>
-                    <a asp-action="EditarTr" asp-route-id="@item.TransportadoraId">Editar</a> |
-                    
-                    <a asp-action="EliminarTr" asp-route-id="@item.TransportadoraId">Eliminar</a>
+                    <a asp-action="EditarTr" asp-route-id="@item.TransportadoraId" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a> |
+
+                    <form asp-action="EliminarTr" asp-route-id="@item.TransportadoraId" class="d-inline">
+                        <button type="submit" onclick="confirm('¿Desea eliminar esta transportadora?')" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    </form>
                 </td>
             </tr>
         }
