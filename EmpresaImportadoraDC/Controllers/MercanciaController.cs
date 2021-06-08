@@ -43,16 +43,16 @@ namespace EmpresaImportadoraDC.Controllers
             return View(mercancia);
         }
 
-        // GET: Cargos/Create
-        public IActionResult CrearMerca()
+        // Ver la vista de mercancias
+        public IActionResult CrearMer()
         {
             return View();
         }
 
-        //Merca
+        //Registrar nueva mercancia
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CrearMerca([Bind("CargoId,Nombre")] Mercancia mercancia)
+        public async Task<IActionResult> CrearMer([Bind("TipoMercancia")] Mercancia mercancia)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace EmpresaImportadoraDC.Controllers
 
         }
         // GET: Cargos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> EditarMerca(int? id)
         {
             if (id == null)
             {
@@ -82,7 +82,7 @@ namespace EmpresaImportadoraDC.Controllers
         //dg
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CargoId,Nombre")] Mercancia mercancia)
+        public async Task<IActionResult> EditarMerca(int id, [Bind("TipoMercancia")] Mercancia mercancia)
         {
             if (id != mercancia.MercanciaId)
             {
@@ -98,7 +98,7 @@ namespace EmpresaImportadoraDC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CargoExists(mercancia.MercanciaId))
+                    if (!MercanciaExistente(mercancia.MercanciaId))
                     {
                         return NotFound();
                     }
@@ -111,7 +111,7 @@ namespace EmpresaImportadoraDC.Controllers
             }
             return View(mercancia);
         }
-        // GET: Cargos/Delete/5
+        // GET: Elimiar/Delete/5
         public async Task<IActionResult> ElimiarMerca(int? id)
         {
             if (id == null)
@@ -128,8 +128,8 @@ namespace EmpresaImportadoraDC.Controllers
 
             return View(mercancia);
         }
-        // POST: Cargos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Merca/Delete/5
+        [HttpPost, ActionName("ElimiarMerca")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -139,7 +139,7 @@ namespace EmpresaImportadoraDC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CargoExists(int id)
+        private bool MercanciaExistente(int id)
         {
             return _context.Mercancia.Any(e => e.MercanciaId == id);
         }
