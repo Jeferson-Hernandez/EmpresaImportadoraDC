@@ -13,8 +13,7 @@ namespace EmpresaImportadoraDC.Models.Entities
     {
         [Key]
         public int PaqueteId { get; set; }
-        [DisplayName("Código")]
-        [Required]
+        [DisplayName("Código")]        
         public string Codigo { get; set; }
 
         [DisplayName("Peso en libras")]

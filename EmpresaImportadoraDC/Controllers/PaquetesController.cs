@@ -61,8 +61,8 @@ namespace EmpresaImportadoraDC.Controllers
         [HttpPost]
         public async Task<IActionResult> CrearPaquete(PaqueteViewModel paqueteViewModel)
         {
-            /*if (ModelState.IsValid)
-            {*/
+            if (ModelState.IsValid)
+            {
                 ValorLibra valorLibra = await _valorLibraService.ObtenerValorLibra();
 
                 Paquete paquete = new()
@@ -109,13 +109,13 @@ namespace EmpresaImportadoraDC.Controllers
                     return RedirectToAction("index");
                 }
 
-            /*}
+            }
             else
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Ocurrió un error";
                 return View(paqueteViewModel);
-            }*/
+            }
         }
         [HttpGet]
         public async Task<IActionResult> EditarPaquete(int id)

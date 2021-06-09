@@ -12,7 +12,7 @@ namespace EmpresaImportadoraDC.ViewModels
     public class PaqueteViewModel
     {
         public int PaqueteId { get; set; }
-        [Required]
+        
         public string Codigo { get; set; }
 
         [DisplayName("Peso en libras")]
@@ -43,5 +43,6 @@ namespace EmpresaImportadoraDC.ViewModels
         public string TransportadoraCO { get; set; }
         [DisplayName("Valor total")]
         public long ValorTotal { get; set; }
+
     }
 }
