@@ -57,5 +57,41 @@
 @section Scripts{
 
     <script src="~/js/tabla.js"></script>
+    <script>
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("RegistrarMercancia")) { <text>
+                  Swal.fire({
+                    title: "Registrar mercancía",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
 
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarMercancia")) { <text>
+                  Swal.fire({
+                    title: "Editar mercancía",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarMercancia")) { <text>
+                  Swal.fire({
+                    title: "Eliminar mercancía",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+                  Swal.fire({
+                    title: "Error",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+    </script>
 }

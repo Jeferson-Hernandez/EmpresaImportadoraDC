@@ -41,8 +41,11 @@ namespace EmpresaImportadoraDC.Controllers
         public async Task<IActionResult> DetallePaquete(int? id)
         {
             if (id == null)
-                return NotFound();
-
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
+            }  
             return View(await _paqueteService.ObtenerPaquetePorId(id.Value));
         }
 
@@ -211,36 +214,56 @@ namespace EmpresaImportadoraDC.Controllers
         [HttpPost]
         public async Task<IActionResult> EliminarPaquete(int id)
         {
-            try
+            if (ModelState.IsValid)
             {
-                Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
-                
-                if (paquete.RutaImagen != null)
+                try
                 {
-                    string wwwRootPath = _hostEnvironment.WebRootPath;
-                    FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
-                    file.Delete();
-                }
+                    Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
 
-                await _paqueteService.EliminarPaquete(id);
-                TempData["Accion"] = "EliminarPaquete";
-                TempData["Mensaje"] = "Paquete eliminado correctamente";
-                return RedirectToAction("index");
+                    if (paquete.RutaImagen != null)
+                    {
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
+                        file.Delete();
+                    }
+
+                    await _paqueteService.EliminarPaquete(id);
+                    TempData["Accion"] = "EliminarPaquete";
+                    TempData["Mensaje"] = "Paquete eliminado correctamente";
+                    return RedirectToAction("index");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ocurrió un error";
+                    return RedirectToAction("index");
+                }
             }
-            catch (Exception)
+            else
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Ocurrió un error";
                 return RedirectToAction("index");
             }
+            
         }
 
         [HttpGet]
         public async Task<IActionResult> DespacharPaquete(int id)
         {
-            ViewBag.ListaTransportadoraCO = new SelectList(await _transportadoraService.ObtenerListaTransportadorasCO(), "Nombre", "Nombre");
-            Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
-            return View(paquete);
+            if (ModelState.IsValid)
+            {
+                ViewBag.ListaTransportadoraCO = new SelectList(await _transportadoraService.ObtenerListaTransportadorasCO(), "Nombre", "Nombre");
+                Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
+                return View(paquete);
+            }
+            else
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
+            }
+            
         }
         [HttpPost]
         public async Task<IActionResult> DespacharPaquete(Paquete paquete)

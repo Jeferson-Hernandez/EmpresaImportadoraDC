@@ -30,14 +30,18 @@ namespace EmpresaImportadoraDC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
             }
 
             var mercancia = await _context.Mercancia
                 .FirstOrDefaultAsync(m => m.MercanciaId == id);
             if (mercancia == null)
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
             }
 
             return View(mercancia);
@@ -58,6 +62,8 @@ namespace EmpresaImportadoraDC.Controllers
             {
                 _context.Add(mercancia);
                 await _context.SaveChangesAsync();
+                TempData["Accion"] = "RegistrarMercancia";
+                TempData["Mensaje"] = "Mercancía registrada correctamente";
                 return RedirectToAction(nameof(Index));
             }
             return View(mercancia);
@@ -68,13 +74,17 @@ namespace EmpresaImportadoraDC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
             }
 
             var mercancia = await _context.Mercancia.FindAsync(id);
             if (mercancia == null)
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
             }
             return View(mercancia);
 
@@ -86,7 +96,9 @@ namespace EmpresaImportadoraDC.Controllers
         {
             if (id != mercancia.MercanciaId)
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
             }
 
             if (ModelState.IsValid)
@@ -94,13 +106,17 @@ namespace EmpresaImportadoraDC.Controllers
                 try
                 {
                     _context.Update(mercancia);
+                    TempData["Accion"] = "EditarMercancia";
+                    TempData["Mensaje"] = "Mercancía editada correctamente";
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!MercanciaExistente(mercancia.MercanciaId))
                     {
-                        return NotFound();
+                        TempData["Accion"] = "Error";
+                        TempData["Mensaje"] = "Ocurrió un error";
+                        return RedirectToAction("index");
                     }
                     else
                     {
@@ -136,6 +152,8 @@ namespace EmpresaImportadoraDC.Controllers
             var mercancia = await _context.Mercancia.FindAsync(id);
             _context.Mercancia.Remove(mercancia);
             await _context.SaveChangesAsync();
+            TempData["Accion"] = "EliminarMercancia";
+            TempData["Mensaje"] = "Mercancía eliminada correctamente";
             return RedirectToAction(nameof(Index));
         }
 
