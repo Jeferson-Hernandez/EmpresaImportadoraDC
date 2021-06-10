@@ -59,10 +59,10 @@
                             @Html.DisplayFor(modelItem => item.Cliente.NombreCliente) | @Html.DisplayFor(modelItem => item.Cliente.NumeroCasillero)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Estado)
+                            @Html.DisplayFor(modelItem => item.Estado.TipoEstado)
                         </td>
                         <td>
-                            @if (item.Estado.Contains("En tránsito a dirección del cliente"))
+                            @if (item.Estado.TipoEstado.Contains("En tránsito a dirección del cliente"))
                             {
                                 <a class="btn btn-dark">Despachado</a>
                             }

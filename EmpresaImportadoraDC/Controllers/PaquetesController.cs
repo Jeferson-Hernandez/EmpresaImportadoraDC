@@ -70,7 +70,7 @@ namespace EmpresaImportadoraDC.Controllers
                     Codigo = "MIA-" + DateTime.Now.ToString("yymmssfff"),
                     PesoLibras = paqueteViewModel.PesoLibras,
                     ClienteId = paqueteViewModel.ClienteId,
-                    Estado = "En Bodega Miami",
+                    EstadoId = 1,
                     NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
                     TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
                     MercanciaId = paqueteViewModel.MercanciaId,
@@ -131,7 +131,7 @@ namespace EmpresaImportadoraDC.Controllers
                 Codigo = paquete.Codigo,
                 PesoLibras = paquete.PesoLibras,
                 ClienteId = paquete.ClienteId,
-                Estado = paquete.Estado,
+                EstadoId = paquete.EstadoId,
                 NoGuiaUSA = paquete.NoGuiaUSA,
                 TransportadoraUSA = paquete.TransportadoraUSA,
                 MercanciaId = paquete.MercanciaId,
@@ -153,7 +153,7 @@ namespace EmpresaImportadoraDC.Controllers
                     Codigo = paqueteViewModel.Codigo,
                     PesoLibras = paqueteViewModel.PesoLibras,
                     ClienteId = paqueteViewModel.ClienteId,
-                    Estado = paqueteViewModel.Estado,
+                    EstadoId = paqueteViewModel.EstadoId,
                     NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
                     TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
                     MercanciaId = paqueteViewModel.MercanciaId,
@@ -270,7 +270,7 @@ namespace EmpresaImportadoraDC.Controllers
         {
             if (ModelState.IsValid)
             {
-                paquete.Estado = "En tránsito a dirección del cliente";
+                paquete.EstadoId = 4;
                 await _paqueteService.EditarPaquete(paquete);
                 TempData["Accion"] = "DespacharPaquete";
                 TempData["Mensaje"] = "Paquete despachado correctamente";

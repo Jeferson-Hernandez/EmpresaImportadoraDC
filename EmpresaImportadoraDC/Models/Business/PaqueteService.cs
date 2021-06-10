@@ -19,7 +19,7 @@ namespace EmpresaImportadoraDC.Models.Business
         }
         public async Task<IEnumerable<Paquete>> ObtenerListaPaquetes()
         {
-            return await _context.Paquete.Include(c=>c.Cliente).Include(m=>m.Mercancia).ToListAsync();
+            return await _context.Paquete.Include(c=>c.Cliente).Include(m=>m.Mercancia).Include(e=>e.Estado).ToListAsync();
         }
         public async Task<Paquete> ObtenerPaquetePorId(int id)
         {

@@ -22,7 +22,7 @@ namespace EmpresaImportadoraDC.ViewModels
         public int ClienteId { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
-        public string Estado { get; set; }
+        public int EstadoId { get; set; }
         [DisplayName("Número de guia USA")]
         public int NoGuiaUSA { get; set; }
         [DisplayName("Transportadora USA")]
