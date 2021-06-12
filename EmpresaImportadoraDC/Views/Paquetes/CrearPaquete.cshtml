@@ -2,25 +2,10 @@
 
 @{
     ViewData["Title"] = "Detalle";
+    Layout = null;
 }
 
-<section class="content">
-    <div class="container-fluid">
-        <br />
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">Registrar paquete</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Paquetes">Inicio</a></li>
-                    <li class="breadcrumb-item active">Registrar paquete</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
-<div class="container-fluid">
+<div class="container-fluid align-content-center">
     <div class="row">
         <div class="col-md-4">
             <form asp-action="CrearPaquete" enctype="multipart/form-data">
@@ -30,8 +15,7 @@
                 <input type="hidden" asp-for="ValorTotal" />
                 <input type="hidden" asp-for="EstadoId" />
                 <input type="hidden" asp-for="RutaImagen" />
-                <input type="hidden" asp-for="Codigo" />
-                <input type="hidden" asp-for="Imagen" />
+                <input type="hidden" asp-for="Codigo" />               
 
                 <div asp-validation-summary="ModelOnly"></div>
                 <div class="form-group">

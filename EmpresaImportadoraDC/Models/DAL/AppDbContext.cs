@@ -14,6 +14,12 @@ namespace EmpresaImportadoraDC.Models.DAL
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Seed();
+        }
+
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Mercancia> Mercancia { get; set; }
         public DbSet<Paquete> Paquete { get; set; }
