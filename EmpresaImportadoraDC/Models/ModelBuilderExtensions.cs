@@ -38,6 +38,35 @@ namespace EmpresaImportadoraDC.Models
                     TipoEstado = "Entregado"
                 }
             );
+            modelBuilder.Entity<ValorLibra>().HasData(
+                new ValorLibra
+                {
+                    ValorLibraId = 1,
+                    ValorLi = 0
+                }
+            );
+            modelBuilder.Entity<Mercancia>().HasData(
+                new Mercancia
+                {
+                    MercanciaId = 1,
+                    TipoMercancia = "Frágil"
+                },
+                new Mercancia
+                {
+                    MercanciaId = 2,
+                    TipoMercancia = "Pesadas"
+                },
+                new Mercancia
+                {
+                    MercanciaId = 3,
+                    TipoMercancia = "Peligrosas"
+                },
+                new Mercancia
+                {
+                    MercanciaId = 4,
+                    TipoMercancia = "Perecederas"
+                }
+            );
         }
     }
 }
