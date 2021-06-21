@@ -76,6 +76,18 @@ namespace EmpresaImportadoraDC.Controllers
                     MercanciaId = paqueteViewModel.MercanciaId,
                     ValorTotal = valorLibra.ValorLi * paqueteViewModel.PesoLibras
                 };
+                if (paquete.PesoLibras <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "El peso debe ser mayor a 0";
+                    return RedirectToAction("index");
+                }
+                else if (paquete.NoGuiaUSA <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingrese un número de guía valido";
+                    return RedirectToAction("index");
+                }
 
                 string wwwRootPath = null;
                 string path = null;
@@ -160,7 +172,19 @@ namespace EmpresaImportadoraDC.Controllers
                     NoGuiaCO = paqueteViewModel.NoGuiaCO,
                     TransportadoraCO = paqueteViewModel.TransportadoraCO,
                     ValorTotal = paqueteViewModel.ValorTotal
-                };                      
+                };
+                if (paquete.PesoLibras <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "El peso debe ser mayor a 0";
+                    return RedirectToAction("index");
+                }
+                else if (paquete.NoGuiaUSA <= 0 || paquete.NoGuiaCO <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingrese un número de guía valido";
+                    return RedirectToAction("index");
+                }
 
                 string wwwRootPath = null;
                 string path = null;
@@ -271,6 +295,12 @@ namespace EmpresaImportadoraDC.Controllers
             if (ModelState.IsValid)
             {
                 paquete.EstadoId = 4;
+                if (paquete.NoGuiaCO <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingrese un número de guía valido";
+                    return RedirectToAction("index");
+                }
                 await _paqueteService.EditarPaquete(paquete);
                 TempData["Accion"] = "DespacharPaquete";
                 TempData["Mensaje"] = "Paquete despachado correctamente";
