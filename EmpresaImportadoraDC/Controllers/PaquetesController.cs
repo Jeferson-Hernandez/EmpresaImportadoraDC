@@ -41,8 +41,11 @@ namespace EmpresaImportadoraDC.Controllers
         public async Task<IActionResult> DetallePaquete(int? id)
         {
             if (id == null)
-                return NotFound();
-
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
+            }  
             return View(await _paqueteService.ObtenerPaquetePorId(id.Value));
         }
 
@@ -58,8 +61,8 @@ namespace EmpresaImportadoraDC.Controllers
         [HttpPost]
         public async Task<IActionResult> CrearPaquete(PaqueteViewModel paqueteViewModel)
         {
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 ValorLibra valorLibra = await _valorLibraService.ObtenerValorLibra();
 
                 Paquete paquete = new()
@@ -67,12 +70,24 @@ namespace EmpresaImportadoraDC.Controllers
                     Codigo = "MIA-" + DateTime.Now.ToString("yymmssfff"),
                     PesoLibras = paqueteViewModel.PesoLibras,
                     ClienteId = paqueteViewModel.ClienteId,
-                    Estado = "En Bodega Miami",
+                    EstadoId = 1,
                     NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
                     TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
                     MercanciaId = paqueteViewModel.MercanciaId,
                     ValorTotal = valorLibra.ValorLi * paqueteViewModel.PesoLibras
                 };
+                if (paquete.PesoLibras <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "El peso debe ser mayor a 0";
+                    return RedirectToAction("index");
+                }
+                else if (paquete.NoGuiaUSA <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingrese un número de guía valido";
+                    return RedirectToAction("index");
+                }
 
                 string wwwRootPath = null;
                 string path = null;
@@ -106,11 +121,13 @@ namespace EmpresaImportadoraDC.Controllers
                     return RedirectToAction("index");
                 }
 
-            /*}
+            }
             else
             {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
                 return View(paqueteViewModel);
-            }*/
+            }
         }
         [HttpGet]
         public async Task<IActionResult> EditarPaquete(int id)
@@ -126,7 +143,7 @@ namespace EmpresaImportadoraDC.Controllers
                 Codigo = paquete.Codigo,
                 PesoLibras = paquete.PesoLibras,
                 ClienteId = paquete.ClienteId,
-                Estado = paquete.Estado,
+                EstadoId = paquete.EstadoId,
                 NoGuiaUSA = paquete.NoGuiaUSA,
                 TransportadoraUSA = paquete.TransportadoraUSA,
                 MercanciaId = paquete.MercanciaId,
@@ -140,112 +157,150 @@ namespace EmpresaImportadoraDC.Controllers
         [HttpPost]
         public async Task<IActionResult> EditarPaquete(PaqueteViewModel paqueteViewModel)
         {
-            //if (ModelState.IsValid)
-            //{
-
-            Paquete paquete = new()
+            if (ModelState.IsValid)
             {
-                PaqueteId = paqueteViewModel.PaqueteId,
-                Codigo = paqueteViewModel.Codigo,
-                PesoLibras = paqueteViewModel.PesoLibras,
-                ClienteId = paqueteViewModel.ClienteId,
-                Estado = paqueteViewModel.Estado,
-                NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
-                TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
-                MercanciaId = paqueteViewModel.MercanciaId,
-                NoGuiaCO = paqueteViewModel.NoGuiaCO,
-                TransportadoraCO = paqueteViewModel.TransportadoraCO,
-                ValorTotal = paqueteViewModel.ValorTotal
-            };                      
-
-            string wwwRootPath = null;
-            string path = null;
-
-            if (paqueteViewModel.Imagen != null)
-            {
-                wwwRootPath = _hostEnvironment.WebRootPath;
-                string nombreImagen = Path.GetFileNameWithoutExtension(paqueteViewModel.Imagen.FileName);
-                string extension = Path.GetExtension(paqueteViewModel.Imagen.FileName);
-                paquete.RutaImagen = nombreImagen + DateTime.Now.ToString("yymmssfff") + extension;
-                path = Path.Combine(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
-            }
-
-            try
-            {
-                if (path != null)
+                Paquete paquete = new()
                 {
-                    using var fileStream = new FileStream(path, FileMode.Create);
-                    await paqueteViewModel.Imagen.CopyToAsync(fileStream);
+                    PaqueteId = paqueteViewModel.PaqueteId,
+                    Codigo = paqueteViewModel.Codigo,
+                    PesoLibras = paqueteViewModel.PesoLibras,
+                    ClienteId = paqueteViewModel.ClienteId,
+                    EstadoId = paqueteViewModel.EstadoId,
+                    NoGuiaUSA = paqueteViewModel.NoGuiaUSA,
+                    TransportadoraUSA = paqueteViewModel.TransportadoraUSA,
+                    MercanciaId = paqueteViewModel.MercanciaId,
+                    NoGuiaCO = paqueteViewModel.NoGuiaCO,
+                    TransportadoraCO = paqueteViewModel.TransportadoraCO,
+                    ValorTotal = paqueteViewModel.ValorTotal
+                };
+                if (paquete.PesoLibras <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "El peso debe ser mayor a 0";
+                    return RedirectToAction("index");
+                }
+                else if (paquete.NoGuiaUSA <= 0 || paquete.NoGuiaCO <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingrese un número de guía valido";
+                    return RedirectToAction("index");
+                }
 
-                    if (paqueteViewModel.RutaImagen != null)
+                string wwwRootPath = null;
+                string path = null;
+
+                if (paqueteViewModel.Imagen != null)
+                {
+                    wwwRootPath = _hostEnvironment.WebRootPath;
+                    string nombreImagen = Path.GetFileNameWithoutExtension(paqueteViewModel.Imagen.FileName);
+                    string extension = Path.GetExtension(paqueteViewModel.Imagen.FileName);
+                    paquete.RutaImagen = nombreImagen + DateTime.Now.ToString("yymmssfff") + extension;
+                    path = Path.Combine(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
+                }
+
+                try
+                {
+                    if (path != null)
                     {
-                        FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paqueteViewModel.RutaImagen);
-                        file.Delete();
+                        using var fileStream = new FileStream(path, FileMode.Create);
+                        await paqueteViewModel.Imagen.CopyToAsync(fileStream);
+
+                        if (paqueteViewModel.RutaImagen != null)
+                        {
+                            FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paqueteViewModel.RutaImagen);
+                            file.Delete();
+                        }
                     }
+                    else
+                    {
+                        paquete.RutaImagen = paqueteViewModel.RutaImagen;
+                    }
+                    await _paqueteService.EditarPaquete(paquete);
+                    TempData["Accion"] = "EditarPaquete";
+                    TempData["Mensaje"] = "Paquete editado correctamente";
+                    return RedirectToAction("index");
                 }
-                else
+                catch (Exception)
                 {
-                    paquete.RutaImagen = paqueteViewModel.RutaImagen;
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ocurrió un error";
+                    return RedirectToAction("index");
                 }
-                await _paqueteService.EditarPaquete(paquete);
-                TempData["Accion"] = "EditarPaquete";
-                TempData["Mensaje"] = "Paquete editado correctamente";
-                return RedirectToAction("index");
             }
-            catch (Exception)
+            else
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Ocurrió un error";
-                return RedirectToAction("index");
-            }
-
-            /*}
-            else
-            {
                 return View(paqueteViewModel);
-            }*/
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> EliminarPaquete(int id)
         {
-            try
+            if (ModelState.IsValid)
             {
-                Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
-                
-                if (paquete.RutaImagen != null)
+                try
                 {
-                    string wwwRootPath = _hostEnvironment.WebRootPath;
-                    FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
-                    file.Delete();
-                }
+                    Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
 
-                await _paqueteService.EliminarPaquete(id);
-                TempData["Accion"] = "EliminarPaquete";
-                TempData["Mensaje"] = "Paquete eliminado correctamente";
-                return RedirectToAction("index");
+                    if (paquete.RutaImagen != null)
+                    {
+                        string wwwRootPath = _hostEnvironment.WebRootPath;
+                        FileInfo file = new FileInfo(wwwRootPath + "/imagenes/" + paquete.RutaImagen);
+                        file.Delete();
+                    }
+
+                    await _paqueteService.EliminarPaquete(id);
+                    TempData["Accion"] = "EliminarPaquete";
+                    TempData["Mensaje"] = "Paquete eliminado correctamente";
+                    return RedirectToAction("index");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ocurrió un error";
+                    return RedirectToAction("index");
+                }
             }
-            catch (Exception)
+            else
             {
                 TempData["Accion"] = "Error";
                 TempData["Mensaje"] = "Ocurrió un error";
                 return RedirectToAction("index");
             }
+            
         }
 
         [HttpGet]
         public async Task<IActionResult> DespacharPaquete(int id)
         {
-            ViewBag.ListaTransportadoraCO = new SelectList(await _transportadoraService.ObtenerListaTransportadorasCO(), "Nombre", "Nombre");
-            Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
-            return View(paquete);
+            if (ModelState.IsValid)
+            {
+                ViewBag.ListaTransportadoraCO = new SelectList(await _transportadoraService.ObtenerListaTransportadorasCO(), "Nombre", "Nombre");
+                Paquete paquete = await _paqueteService.ObtenerPaquetePorId(id);
+                return View(paquete);
+            }
+            else
+            {
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("index");
+            }
+            
         }
         [HttpPost]
         public async Task<IActionResult> DespacharPaquete(Paquete paquete)
         {
             if (ModelState.IsValid)
             {
-                paquete.Estado = "En tránsito a dirección del cliente";
+                paquete.EstadoId = 4;
+                if (paquete.NoGuiaCO <= 0)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ingrese un número de guía valido";
+                    return RedirectToAction("index");
+                }
                 await _paqueteService.EditarPaquete(paquete);
                 TempData["Accion"] = "DespacharPaquete";
                 TempData["Mensaje"] = "Paquete despachado correctamente";

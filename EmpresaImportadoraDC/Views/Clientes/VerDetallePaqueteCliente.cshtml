@@ -9,12 +9,12 @@
         <br />
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">DETALLE</h1>
+                <h1 class="m-0">Detalle del envío</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="">Inicio</a></li>
-                    <li class="breadcrumb-item active">Paquetes</li>
+                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Clientes">Inicio</a></li>
+                    <li class="breadcrumb-item active">Detalle del envío</li>
                 </ol>
             </div>
         </div>
@@ -36,6 +36,31 @@
                     </th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PesoLibras)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorTotal)
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
 </section>
+
+@section Scripts{
+
+    <script src="~/js/tabla.js"></script>
+
+}

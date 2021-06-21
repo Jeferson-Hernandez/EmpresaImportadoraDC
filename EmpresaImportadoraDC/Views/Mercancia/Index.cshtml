@@ -8,46 +8,42 @@
         <br />
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">MERCANCIA</h1>
+                <h1 class="m-0">Mercancía</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                    <li class="breadcrumb-item active">Mercancia</li>
+                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Mercancia">Inicio</a></li>
+                    <li class="breadcrumb-item active">Mercancía</li>
                 </ol>
             </div>
         </div>
         <br />
         <p>
-            <a asp-action="CrearMerca" class="btn btn-success"><i class="fas fa-user-plus"></i>Registrar Mercancia</a>
+            <a asp-action="CrearMer" class="btn btn-success"><i class="fas fa-plus"></i> Registrar Mercancía</a>
         </p>
         <table class="table" id="tabla">
             <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.MercanciaId)
-                    </th>
+                <tr>                    
                     <th>
                         @Html.DisplayNameFor(model => model.TipoMercancia)
                     </th>
-                    Acciones
+                    <th>
+                        Acciones
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MercanciaId)
-                        </td>
+                    <tr>                       
                         <td>
                             @Html.DisplayFor(modelItem => item.TipoMercancia)
                         </td>
                         <td>
-                            <a asp-action="EditarMerca" asp-route-id="@item.MercanciaId">EditarMercancia</a> |
+                            <a asp-action="EditarMerca" asp-route-id="@item.MercanciaId" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a> |
+
                             <form asp-action="ElimiarMerca" asp-route-id="@item.MercanciaId" class="d-inline">
-                                <button type="submit" onclick="confirm('¿Desea eliminar este registro?')" class="btn btn-danger"><i class="fas fa-user-minus"></i>Eliminar</button>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
                             </form>
                         </td>
                     </tr>
@@ -57,3 +53,45 @@
         </table>
     </div>
 </section>
+
+@section Scripts{
+
+    <script src="~/js/tabla.js"></script>
+    <script>
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("RegistrarMercancia")) { <text>
+                  Swal.fire({
+                    title: "Registrar mercancía",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarMercancia")) { <text>
+                  Swal.fire({
+                    title: "Editar mercancía",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarMercancia")) { <text>
+                  Swal.fire({
+                    title: "Eliminar mercancía",
+                      icon: 'success',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("Error")) { <text>
+                  Swal.fire({
+                    title: "Error",
+                      icon: 'error',
+                    html: "@TempData["Mensaje"]"
+                  });
+                 </text>
+        }
+    </script>
+}

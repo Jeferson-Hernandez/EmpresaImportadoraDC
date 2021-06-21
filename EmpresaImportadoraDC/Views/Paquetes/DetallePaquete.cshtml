@@ -2,25 +2,9 @@
 
 @{
     ViewData["Title"] = "Detalle";
+    Layout = null;
 }
 
-<section class="content">
-    <div class="container-fluid">
-        <br />
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">DETALLE DE PAQUETE</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Paquetes">Inicio</a></li>
-                    <li class="breadcrumb-item active">Detalle de paquete</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
-<br />
 <div class="container-fluid">
     
         <form asp-route-id="@Model.PaqueteId">
@@ -35,7 +19,7 @@
                 <p><strong>Cliente: </strong> @Model.Cliente.NombreCliente</p>
             </div>
             <div class="form-group">
-                <p><strong>Estado: </strong> @Model.Estado</p>
+                <p><strong>Estado: </strong> @Model.Estado.TipoEstado</p>
             </div>
             <div class="form-group">
                 <p><strong>Guía transportadora USA: </strong> @Model.NoGuiaUSA</p>
@@ -66,9 +50,9 @@
             <div class="form-group">
                 <p><strong>Valor total: </strong> @Model.ValorTotal</p>
             </div>
-        </form>
-    
+        </form>    
  </div>
+<br/>
 
 
 

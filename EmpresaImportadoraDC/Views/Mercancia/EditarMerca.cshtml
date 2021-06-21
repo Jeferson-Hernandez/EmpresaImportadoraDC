@@ -3,13 +3,23 @@
 @{
     ViewData["Title"] = "EditarMerca";
 }
-<h1>EditarMercancia</h1>
-
-<hr />
-
+<br />
+<div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Editar mercancía</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="Mercancia">Inicio</a></li>
+                <li class="breadcrumb-item active">Editar mercancía</li>
+            </ol>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditarCli">
+        <form asp-action="EditarMerca">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="MercanciaId" />
@@ -19,18 +29,10 @@
                 <span asp-validation-for="TipoMercancia" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MercanciaId" class="control-label"></label>
-                <input asp-for="MercanciaId" class="form-control" />
-                <span asp-validation-for="MercanciaId" class="text-danger"></span>
-            </div>           
-            <div class="form-group">
                 <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-<div>
-    <a asp-action="Index">volver</a>
 </div>
 
 @section Scripts {

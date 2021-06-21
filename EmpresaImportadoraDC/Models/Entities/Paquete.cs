@@ -13,7 +13,7 @@ namespace EmpresaImportadoraDC.Models.Entities
     {
         [Key]
         public int PaqueteId { get; set; }
-        [Required]
+        [DisplayName("Código")]        
         public string Codigo { get; set; }
 
         [DisplayName("Peso en libras")]
@@ -21,10 +21,9 @@ namespace EmpresaImportadoraDC.Models.Entities
         public int PesoLibras { get; set; }
         [DisplayName("Cliente y casillero")]       
         public int ClienteId { get; set; }
-        
-        [Column(TypeName = "nvarchar(50)")]
-        public string Estado { get; set; }
-
+        [DisplayName("Estado")]
+        public int EstadoId { get; set; }
+        [Required(ErrorMessage = "El número de guia es obligatoria")]
         public int NoGuiaUSA { get; set; }
         [Required(ErrorMessage = "La transportadora es obligatoria")]
         [Column(TypeName = "nvarchar(50)")]
@@ -35,14 +34,17 @@ namespace EmpresaImportadoraDC.Models.Entities
 
         public string RutaImagen { get; set; }
 
+        [DisplayName("Número de guía Colombia")]
         public int NoGuiaCO { get; set; }
 
+        [DisplayName("Transportadora Colombia")]
         [Column(TypeName = "nvarchar(50)")]
         public string TransportadoraCO { get; set; }
-        
+        [DisplayName("Valor total")]
         public long ValorTotal { get; set; }
         
         public virtual Mercancia Mercancia { get; set; }
-        public virtual Cliente Cliente{ get; set;}
+        public virtual Cliente Cliente { get; set;}
+        public virtual Estado Estado { get; set; }
     }
 }

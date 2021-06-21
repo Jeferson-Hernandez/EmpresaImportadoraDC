@@ -2,33 +2,15 @@
 
 @{
     ViewData["Title"] = "Editar";
+    Layout = null;
 }
 
-<section class="content">
-    <div class="container-fluid">
-        <br />
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0">EDITAR PAQUETE</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a asp-action="index" asp-controller="Paquetes">Inicio</a></li>
-                    <li class="breadcrumb-item active">Editar paquete</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="EditarPaquete" asp-route-id="@Model.PaqueteId" enctype="multipart/form-data">  
+            <form asp-action="EditarPaquete" asp-route-id="@Model.PaqueteId" enctype="multipart/form-data">
                 <input type="hidden" asp-for="PaqueteId" />
-                <input type="hidden" asp-for="NoGuiaCO" />
-                <input type="hidden" asp-for="TransportadoraCO" />
-                <input type="hidden" asp-for="ValorTotal" />
-                <input type="hidden" asp-for="Estado" />
+                <input type="hidden" asp-for="EstadoId" />
                 <input type="hidden" asp-for="RutaImagen" />
                 <input type="hidden" asp-for="Codigo" />
 
@@ -54,7 +36,7 @@
                     <span asp-validation-for="TransportadoraUSA" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Tipo de mercancía</label>                    
+                    <label class="control-label">Tipo de mercancía</label>
                     <select asp-items="ViewBag.ListaMercancia" asp-for="MercanciaId" class="form-control"></select>
                     <span asp-validation-for="MercanciaId" class="text-danger"></span>
                 </div>
@@ -85,3 +67,7 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

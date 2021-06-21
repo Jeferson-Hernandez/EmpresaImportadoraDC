@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace EmpresaImportadoraDC.Models.Entities
 {
-    public class Mercancia
+    public class Estado
     {
         [Key]
-        public int MercanciaId { get; set; }
-        [DisplayName("Tipo de mercancía")]
-        [Required(ErrorMessage = "El tipo de mercancía es obligatoria")]
-        [Column (TypeName = "nvarchar(50)")]
-        public string TipoMercancia { get; set; }
+        public int EstadoId { get; set; }
+
+        [DisplayName("Estado")]
+        [Column(TypeName = "nvarchar(50)")]
+        public string TipoEstado { get; set; }
     }
 }
