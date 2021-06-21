@@ -9,24 +9,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using EmpresaImportadoraDC.Models.Abstract;
+using Microsoft.AspNetCore.Hosting;
 
 namespace EmpresaImportadoraDC.Controllers
 {
     public class TransportadorasController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly ITransportadoraService _transportadoraService;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public TransportadorasController(AppDbContext context)
+
+        public TransportadorasController(ITransportadoraService transportadoraService, IWebHostEnvironment hostEnvironment)
         {
-            _context = context;
+            _transportadoraService = transportadoraService;
+            _hostEnvironment = hostEnvironment;
         }
 
-        // GET: Transportadoras
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Transportadora.ToListAsync());
+            return View(await _transportadoraService.ObtenerListaTransportadoras());
         }
-        
+
         // Crear
         public IActionResult CrearTr()
         {
@@ -36,29 +41,31 @@ namespace EmpresaImportadoraDC.Controllers
         // Crear
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CrearTr([Bind("TransportadoraId, Nombre, Pais")] Transportadora transportadora)
+        public async Task<IActionResult> CrearTr(Transportadora transportadora)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Add(transportadora);
-                    await _context.SaveChangesAsync();
-                    TempData["Accion"] = "CrearTra";
-                    TempData["Mensaje"] = "Transportadora creada exitosamente";
-                    return RedirectToAction(nameof(Index));
+                    await _transportadoraService.RegistrarTransportadora(transportadora);
+                   
+                    
                 }
-            }catch (Exception)
+                TempData["Accion"] = "CrearTra";
+                TempData["Mensaje"] = "Transportadora creada exitosamente";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
             {
                 TempData["Accion"] = "CrearTraF";
                 TempData["Mensaje"] = "Fallo al crear la transportadora";
-                 
+                return RedirectToAction(nameof(Index));
             }
-            return View(transportadora);
+            
         }
 
         // Editar
-        public async Task<IActionResult> EditarTr(int? Id)
+       /* public async Task<IActionResult> EditarTr(int? Id)
         {
 
             if (Id == null)
@@ -158,5 +165,6 @@ namespace EmpresaImportadoraDC.Controllers
         {
             return _context.Transportadora.Any(e => e.TransportadoraId == Id);
         }
+       */
     }
 }

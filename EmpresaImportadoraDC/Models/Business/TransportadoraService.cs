@@ -21,6 +21,26 @@ namespace EmpresaImportadoraDC.Models.Business
         {
             return await _context.Transportadora.ToListAsync();
         }
+        public async Task<Transportadora> ObtenerTransportadoraPorId(int Id)
+        {
+            return await _context.Transportadora.FirstOrDefaultAsync(t => t.TransportadoraId == Id);
+        }
+        public async Task RegistrarTransportadora(Transportadora transportadora)
+        {
+            _context.Add(transportadora);
+            await _context.SaveChangesAsync();
+        }
+        public async Task EditarTransportadora(Transportadora transportadora)
+        {
+            _context.Update(transportadora);
+            await _context.SaveChangesAsync();
+        }
+        public async Task EliminarTransportadora(int Id)
+        {
+            var transportadora = await ObtenerTransportadoraPorId(Id);
+            _context.Remove(transportadora);
+            await _context.SaveChangesAsync();
+        }
         public async Task<IEnumerable<Transportadora>> ObtenerListaTransportadorasUSA()
         {
             return await _context.Transportadora.Where(u=>u.Pais == "USA").ToListAsync();            
@@ -28,6 +48,10 @@ namespace EmpresaImportadoraDC.Models.Business
         public async Task<IEnumerable<Transportadora>> ObtenerListaTransportadorasCO()
         {
             return await _context.Transportadora.Where(c => c.Pais == "CO").ToListAsync();
+        }
+        public async Task<IEnumerable<Transportadora>> ObtenerListaPaquetesPorId(int Id)
+        {
+            return await _context.Transportadora.Where(p => p.TransportadoraId == Id).ToListAsync();
         }
 
     }
