@@ -179,7 +179,7 @@ namespace EmpresaImportadoraDC.Controllers
                     TempData["Mensaje"] = "El peso debe ser mayor a 0";
                     return RedirectToAction("index");
                 }
-                else if (paquete.NoGuiaUSA <= 0 || paquete.NoGuiaCO <= 0)
+                else if (paquete.NoGuiaUSA <= 0 || paquete.NoGuiaCO < 0)
                 {
                     TempData["Accion"] = "Error";
                     TempData["Mensaje"] = "Ingrese un número de guía valido";
