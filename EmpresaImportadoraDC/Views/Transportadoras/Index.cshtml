@@ -22,7 +22,7 @@
 </div>
 <br />
 <p>
-    <a asp-action="CrearTr" class="btn btn-success "><i class="fas fa-plus"></i> Registrar transportadora</a>
+    <a onclick="mostrarModalG('@Url.Action("CrearTr","Transportadoras","null", Context.Request.Scheme)', 'Registrar transportadora')" class="btn btn-success "><i class="fas fa-plus"></i> Registrar transportadora</a>
 </p>
 <table class="table" id="tabla">
     <thead>
@@ -48,7 +48,7 @@
                     @Html.DisplayFor(modelItem => item.Pais)
                 </td>
                 <td>
-                    <a asp-action="EditarTr" asp-route-id="@item.TransportadoraId" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a> |
+                    <a onclick="mostrarModalG('@Url.Action("EditarTr","Transportadoras", new {id = item.TransportadoraId}, Context.Request.Scheme)', 'Editar transportadora')" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>| |
 
                     <form asp-action="EliminarTr" asp-route-id="@item.TransportadoraId" class="d-inline">
                         <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
@@ -60,6 +60,7 @@
 </table>
 @section Scripts{
     <script src="~/js/tabla.js"></script>
+    <script src="~/js/modals.js"></script>
 
 <script>
         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("CrearTra")) { <text>
@@ -71,7 +72,7 @@
                  </text>
         }
 
-         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarTra")) { <text>
+         @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EditarTr")) { <text>
                   Swal.fire({
                     title: "Proceso finalizado",
                       icon: 'success',
@@ -82,7 +83,7 @@
 
          
 
-        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarTra")) { <text>
+        @if(TempData["Mensaje"] != null && TempData["Accion"].ToString().Equals("EliminarTr")) { <text>
                   Swal.fire({
                     title: "Proceso finalizado",
                       icon: 'success',
