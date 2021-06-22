@@ -44,7 +44,7 @@ namespace EmpresaImportadoraDC.Models.Business
 
         public async Task<IEnumerable<Paquete>> ObtenerListaPaquetesPorId(int id)
         {
-            return await _context.Paquete.Where(p => p.ClienteId == id).ToListAsync();
+            return await _context.Paquete.Include(e => e.Estado).Where(p => p.ClienteId == id).ToListAsync();
         }
     }
 }

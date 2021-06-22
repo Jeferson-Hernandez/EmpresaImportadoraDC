@@ -59,7 +59,7 @@
                             @Html.DisplayFor(modelItem => item.DireccionEntrega)
                         </td>
                         <td>
-                            <a asp-action="VerDetallePaqueteCliente" asp-route-id="@item.ClienteId" class="btn btn-dark"><i class="fas fa-info-circle"></i></a>
+                            <a onclick="mostrarModalG('@Url.Action("VerDetallePaqueteCliente","Clientes", new {id = item.ClienteId}, Context.Request.Scheme)', 'Detalle paquete-cliente')" class="btn btn-dark"><i class="fas fa-info-circle"></i></a>
                             <a onclick="mostrarModalG('@Url.Action("EditarCli","Clientes", new {id = item.ClienteId}, Context.Request.Scheme)', 'Editar cliente')" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
 
                             <form asp-action="EliminarCliente" asp-route-id="@item.ClienteId" class="d-inline">

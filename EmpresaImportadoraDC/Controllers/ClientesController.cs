@@ -16,17 +16,19 @@ namespace EmpresaImportadoraDC.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IPaqueteService _paqueteService;
+        private readonly IClienteService _clienteService;
 
-        public ClientesController(AppDbContext context, IPaqueteService paqueteService)
+        public ClientesController(AppDbContext context, IPaqueteService paqueteService, IClienteService clienteService)
         {
             _context = context;
             _paqueteService = paqueteService;
+            _clienteService = clienteService;
         }
 
         // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cliente.ToListAsync());
+            return View(await _clienteService.ObtenerListaClientes());
         }
         [HttpGet]
         public async Task<IActionResult> VerDetallePaqueteCliente(int? id)
@@ -46,15 +48,16 @@ namespace EmpresaImportadoraDC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CrearCli([Bind("ClienteId,NumeroCasillero,NombreCliente,Correo,DireccionEntrega")] Cliente cliente)
+        public async Task<IActionResult> CrearCli(Cliente cliente)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    _context.Add(cliente);
-                    await _context.SaveChangesAsync();
-                }
+                    Random random = new();
+                    cliente.NumeroCasillero = random.Next();
+                    await _clienteService.CrearCliente(cliente);
+                };
                 TempData["Accion"] = "RegistrarCliente";
                 TempData["Mensaje"] = "Registro exitoso";
                 return RedirectToAction(nameof(Index));
@@ -67,24 +70,15 @@ namespace EmpresaImportadoraDC.Controllers
             }
         }
 
-        public async Task<IActionResult> EditarCli(int? Id)
+        public async Task<IActionResult> EditarCli(int Id)
         {
-            if (Id == null)
-            {
-                return NotFound();
-            }
-
-            var cliente = await _context.Cliente.FindAsync(Id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
+            Cliente cliente = await _clienteService.ObtenerClientePorId(Id);
             return View(cliente);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditarCli(int Id, [Bind("ClienteId,NumeroCasillero,NombreCliente,Correo,DireccionEntrega")] Cliente cliente)
+        public async Task<IActionResult> EditarCli(int Id,Cliente cliente)
         {
             if (Id != cliente.ClienteId)
             {
@@ -95,22 +89,13 @@ namespace EmpresaImportadoraDC.Controllers
             {
                 try
                 {
-                    _context.Update(cliente);
-                    await _context.SaveChangesAsync();
+                    await _clienteService.EditarCliente(cliente);
                     TempData["Accion"] = "EditarCliente";
                     TempData["Mensaje"] = "Modificacion exitosa";
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!ClienteExists(cliente.ClienteId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
                     TempData["Accion"] = "EditarClienteEC";
                     TempData["Mensaje"] = "Modificacion fallida";
                     return RedirectToAction(nameof(Index));
@@ -118,33 +103,14 @@ namespace EmpresaImportadoraDC.Controllers
             }
             return View(cliente);
         }
-
-        public async Task<IActionResult>EliminarCliente(int? Id)
-        {
-            if (Id == null)
-            {
-                return NotFound();
-            }
-
-            var cliente = await _context.Cliente
-                .FirstOrDefaultAsync(m => m.ClienteId == Id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-
-            return View(cliente);
-        }
-
-        [HttpPost, ActionName("EliminarCliente")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int Id)
+        public async Task<IActionResult> EliminarCliente(int Id)
         {
             try
             {
-                var cliente = await _context.Cliente.FindAsync(Id);
-                _context.Cliente.Remove(cliente);
-                await _context.SaveChangesAsync();
+               
+                await _clienteService.EliminarCliente(Id);
                 TempData["Accion"] = "EliminarCliente";
                 TempData["Mensaje"] = "Cliente eliminado exitoso";
                 return RedirectToAction(nameof(Index));
@@ -155,11 +121,6 @@ namespace EmpresaImportadoraDC.Controllers
                 TempData["Mensaje"] = "Cliente eliminado fallido";
                 return RedirectToAction(nameof(Index));
             }
-        }
-
-        private bool ClienteExists(int Id)
-        {
-            return _context.Cliente.Any(e => e.ClienteId == Id);
         }
         [HttpGet]
         public async Task<IActionResult> DashboardCli()

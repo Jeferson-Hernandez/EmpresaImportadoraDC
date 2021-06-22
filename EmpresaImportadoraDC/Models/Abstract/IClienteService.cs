@@ -9,5 +9,9 @@ namespace EmpresaImportadoraDC.Models.Abstract
     public interface IClienteService
     {
         Task<IEnumerable<Cliente>> ObtenerListaClientes();
+        Task CrearCliente(Cliente cliente);
+        Task<Cliente> ObtenerClientePorId(int id);
+        Task EditarCliente(Cliente cliente);
+        Task EliminarCliente(int id);
     } 
 }

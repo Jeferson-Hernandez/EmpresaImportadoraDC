@@ -23,18 +23,13 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NumeroCasillero" class="control-label"></label>
-                <input asp-for="NumeroCasillero" class="form-control" />
-                <span asp-validation-for="NumeroCasillero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="NombreCliente" class="control-label"></label>
                 <input asp-for="NombreCliente" class="form-control" />
                 <span asp-validation-for="NombreCliente" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Correo" class="control-label"></label>
-                <input asp-for="Correo" class="form-control" />
+                <input asp-for="Correo" type="email" class="form-control" />
                 <span asp-validation-for="Correo" class="text-danger"></span>
             </div>
             <div class="form-group">

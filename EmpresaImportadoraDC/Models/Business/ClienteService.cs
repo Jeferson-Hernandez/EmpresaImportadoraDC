@@ -21,5 +21,25 @@ namespace EmpresaImportadoraDC.Models.Business
         {
             return await _context.Cliente.ToListAsync();
         }
+        public async Task CrearCliente(Cliente cliente)
+        {
+            _context.Add(cliente);
+            await _context.SaveChangesAsync();
+        }
+        public async Task<Cliente> ObtenerClientePorId(int id)
+        {
+            return await _context.Cliente.FirstOrDefaultAsync(p => p.ClienteId == id);
+        }
+        public async Task EditarCliente(Cliente cliente)
+        {
+            _context.Update(cliente);
+            await _context.SaveChangesAsync();
+        }
+        public async Task EliminarCliente(int id)
+        {
+            var cliente = await ObtenerClientePorId(id);
+            _context.Remove(cliente);
+            await _context.SaveChangesAsync();
+        }
     }
 }
