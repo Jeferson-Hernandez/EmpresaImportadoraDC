@@ -2,7 +2,7 @@
 
 namespace EmpresaImportadoraDC.Migrations
 {
-    public partial class inicial : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,19 @@ namespace EmpresaImportadoraDC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cliente", x => x.ClienteId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Estado",
+                columns: table => new
+                {
+                    EstadoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TipoEstado = table.Column<string>(type: "nvarchar(50)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estado", x => x.EstadoId);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,10 +81,10 @@ namespace EmpresaImportadoraDC.Migrations
                 {
                     PaqueteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Codigo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Codigo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PesoLibras = table.Column<int>(type: "int", nullable: false),
                     ClienteId = table.Column<int>(type: "int", nullable: false),
-                    Estado = table.Column<string>(type: "nvarchar(50)", nullable: true),
+                    EstadoId = table.Column<int>(type: "int", nullable: false),
                     NoGuiaUSA = table.Column<int>(type: "int", nullable: false),
                     TransportadoraUSA = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     MercanciaId = table.Column<int>(type: "int", nullable: false),
@@ -90,6 +103,12 @@ namespace EmpresaImportadoraDC.Migrations
                         principalColumn: "ClienteId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Paquete_Estado_EstadoId",
+                        column: x => x.EstadoId,
+                        principalTable: "Estado",
+                        principalColumn: "EstadoId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Paquete_Mercancia_MercanciaId",
                         column: x => x.MercanciaId,
                         principalTable: "Mercancia",
@@ -97,10 +116,43 @@ namespace EmpresaImportadoraDC.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Estado",
+                columns: new[] { "EstadoId", "TipoEstado" },
+                values: new object[,]
+                {
+                    { 1, "En Bodega Miami" },
+                    { 2, "En tránsito a Colombia" },
+                    { 3, "En bodega Colombia" },
+                    { 4, "En tránsito a dirección del cliente" },
+                    { 5, "Entregado" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Mercancia",
+                columns: new[] { "MercanciaId", "TipoMercancia" },
+                values: new object[,]
+                {
+                    { 1, "Frágil" },
+                    { 2, "Pesadas" },
+                    { 3, "Peligrosas" },
+                    { 4, "Perecederas" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ValorLibra",
+                columns: new[] { "ValorLibraId", "ValorLi" },
+                values: new object[] { 1, 0 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Paquete_ClienteId",
                 table: "Paquete",
                 column: "ClienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Paquete_EstadoId",
+                table: "Paquete",
+                column: "EstadoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Paquete_MercanciaId",
@@ -121,6 +173,9 @@ namespace EmpresaImportadoraDC.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cliente");
+
+            migrationBuilder.DropTable(
+                name: "Estado");
 
             migrationBuilder.DropTable(
                 name: "Mercancia");

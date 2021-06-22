@@ -59,6 +59,33 @@ namespace EmpresaImportadoraDC.Migrations
                     b.HasKey("EstadoId");
 
                     b.ToTable("Estado");
+
+                    b.HasData(
+                        new
+                        {
+                            EstadoId = 1,
+                            TipoEstado = "En Bodega Miami"
+                        },
+                        new
+                        {
+                            EstadoId = 2,
+                            TipoEstado = "En tránsito a Colombia"
+                        },
+                        new
+                        {
+                            EstadoId = 3,
+                            TipoEstado = "En bodega Colombia"
+                        },
+                        new
+                        {
+                            EstadoId = 4,
+                            TipoEstado = "En tránsito a dirección del cliente"
+                        },
+                        new
+                        {
+                            EstadoId = 5,
+                            TipoEstado = "Entregado"
+                        });
                 });
 
             modelBuilder.Entity("EmpresaImportadoraDC.Models.Entities.Mercancia", b =>
@@ -75,6 +102,28 @@ namespace EmpresaImportadoraDC.Migrations
                     b.HasKey("MercanciaId");
 
                     b.ToTable("Mercancia");
+
+                    b.HasData(
+                        new
+                        {
+                            MercanciaId = 1,
+                            TipoMercancia = "Frágil"
+                        },
+                        new
+                        {
+                            MercanciaId = 2,
+                            TipoMercancia = "Pesadas"
+                        },
+                        new
+                        {
+                            MercanciaId = 3,
+                            TipoMercancia = "Peligrosas"
+                        },
+                        new
+                        {
+                            MercanciaId = 4,
+                            TipoMercancia = "Perecederas"
+                        });
                 });
 
             modelBuilder.Entity("EmpresaImportadoraDC.Models.Entities.Paquete", b =>
@@ -162,6 +211,13 @@ namespace EmpresaImportadoraDC.Migrations
                     b.HasKey("ValorLibraId");
 
                     b.ToTable("ValorLibra");
+
+                    b.HasData(
+                        new
+                        {
+                            ValorLibraId = 1,
+                            ValorLi = 0
+                        });
                 });
 
             modelBuilder.Entity("EmpresaImportadoraDC.Models.Entities.Paquete", b =>

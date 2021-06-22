@@ -65,29 +65,18 @@ namespace EmpresaImportadoraDC.Controllers
         }
 
         // Editar
-       /* public async Task<IActionResult> EditarTr(int? Id)
+        public async Task<IActionResult> EditarTr(int Id)
         {
 
-            if (Id == null)
-            {
-                return NotFound();
-            }
-
-            var transportadora = await _context.Transportadora.FindAsync(Id);
-            
-            if (transportadora == null)
-            {
-                return NotFound();
-            }
+            Transportadora transportadora = await _transportadoraService.ObtenerTransportadoraPorId(Id);
             return View(transportadora);
         }
 
         // Editar
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditarTr(int Id, [Bind("TransportadoraId, Nombre, Pais")] Transportadora transportadora)
+        public async Task<IActionResult> EditarTr(int Id, Transportadora transportadora)
         {
-
             if (Id != transportadora.TransportadoraId)
             {
                 return NotFound();
@@ -97,74 +86,49 @@ namespace EmpresaImportadoraDC.Controllers
             {
                 try
                 {
-                    _context.Update(transportadora);
-                    await _context.SaveChangesAsync();
-                    TempData["Accion"] = "EditarTra";
-                    TempData["Mensaje"] = "Transportadora editada exitosamente";
+                    await _transportadoraService.EditarTransportadora(transportadora);
+                    TempData["Accion"] = "EditarTr";
+                    TempData["Mensaje"] = "Modificacion exitosa";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    TempData["Accion"] = "EditarTra";
-                    TempData["Mensaje"] = "Fallo al editar la transportadora";
-                    if (!TransportadoraExists(transportadora.TransportadoraId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    TempData["Accion"] = "EditarTrF";
+                    TempData["Mensaje"] = "Modificacion fallida";
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(transportadora);
         }
-
-        //Eliminar
-        public async Task<IActionResult> EliminarTr(int? Id)
+        [HttpPost]
+        public async Task<IActionResult> EliminarTr(int Id)
         {
-
-            if (Id == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                try
+                {
+                    Transportadora transportadora = await _transportadoraService.ObtenerTransportadoraPorId(Id);
+
+                    await _transportadoraService.EliminarTransportadora(Id);
+                    TempData["Accion"] = "EliminarTr";
+                    TempData["Mensaje"] = "Transportadora eliminada correctamente";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    TempData["Accion"] = "Error";
+                    TempData["Mensaje"] = "Ocurrió un error";
+                    return RedirectToAction("Index");
+                }
             }
-            
-            var transportadora = await _context.Transportadora
-                .FirstOrDefaultAsync(m => m.TransportadoraId == Id);
-            if (transportadora == null)
+            else
             {
-                return NotFound();
+                TempData["Accion"] = "Error";
+                TempData["Mensaje"] = "Ocurrió un error";
+                return RedirectToAction("Index");
             }
 
-            return View(transportadora);
         }
-
-        // Eliminar
-        [HttpPost, ActionName("EliminarTr")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EliminarConfirmado(int Id)
-        {
-            try
-            {
-                var transportadora = await _context.Transportadora.FindAsync(Id);
-                _context.Transportadora.Remove(transportadora);
-                await _context.SaveChangesAsync();
-                TempData["Accion"] = "EliminarTra";
-                TempData["Mensaje"] = "Transportadora eliminada exitosamente";
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                TempData["Accion"] = "EliminarTra";
-                TempData["Mensaje"] = "Fallo al eliminar la transportadora";
-                return RedirectToAction(nameof(Index));
-            }
-        }
-
-        private bool TransportadoraExists(int Id)
-        {
-            return _context.Transportadora.Any(e => e.TransportadoraId == Id);
-        }
-       */
+        
     }
 }

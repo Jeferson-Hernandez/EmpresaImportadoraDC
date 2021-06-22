@@ -49,7 +49,7 @@ namespace EmpresaImportadoraDC.Models.Business
         {
             return await _context.Transportadora.Where(c => c.Pais == "CO").ToListAsync();
         }
-        public async Task<IEnumerable<Transportadora>> ObtenerListaPaquetesPorId(int Id)
+        public async Task<IEnumerable<Transportadora>> ObtenerListaTransportadorasPorId(int Id)
         {
             return await _context.Transportadora.Where(p => p.TransportadoraId == Id).ToListAsync();
         }
