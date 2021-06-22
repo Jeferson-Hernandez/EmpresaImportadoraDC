@@ -100,6 +100,8 @@ namespace EmpresaImportadoraDC.Controllers
             }
             return View(transportadora);
         }
+
+        // Eliminar
         [HttpPost]
         public async Task<IActionResult> EliminarTr(int Id)
         {
