@@ -20,10 +20,10 @@ namespace EmpresaImportadoraDC.Controllers
         private readonly IWebHostEnvironment _hostEnvironment;
 
 
-        public TransportadorasController(ITransportadoraService transportadoraService, IWebHostEnvironment hostEnvironment)
+        public TransportadorasController(ITransportadoraService transportadoraService)
         {
             _transportadoraService = transportadoraService;
-            _hostEnvironment = hostEnvironment;
+            
         }
 
         [HttpGet]
