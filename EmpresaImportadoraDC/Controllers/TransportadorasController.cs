@@ -17,7 +17,7 @@ namespace EmpresaImportadoraDC.Controllers
     public class TransportadorasController : Controller
     {
         private readonly ITransportadoraService _transportadoraService;
-        private readonly IWebHostEnvironment _hostEnvironment;
+      
 
 
         public TransportadorasController(ITransportadoraService transportadoraService)
